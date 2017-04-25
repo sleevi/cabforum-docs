@@ -853,30 +853,26 @@ The CA SHALL update and reissue CRLs at least (i) once every twelve months and (
 No stipulation.
 
 ### 4.9.9 On-line revocation/status checking availability
-OCSP responses MUST conform to RFC6960 and/or RFC5019. OCSP responses MUST either:
-
-1. Be signed by the CA that issued the Certificates whose revocation status is being checked, or
-2. Be signed by an OCSP Responder whose Certificate is signed by the CA that issued the Certificate whose
-revocation status is being checked.
-
-In the latter case, the OCSP signing Certificate MUST contain an extension of type id-pkix-ocsp-nocheck, as
-defined by RFC6960.
+The CA SHALL provide an OCSP responder that conforms to the profile specified by RFC5019 for all Certificates issued, including the transport profile.
 
 ### 4.9.10 On-line revocation checking requirements
-Effective 1 January 2013, the CA SHALL support an OCSP capability using the GET method for Certificates issued
-in accordance with these Requirements.
+All OCSP responses MUST conform to the profile specified in Section 7.3
 
-For the status of Subscriber Certificates:
+For newly issued Subscriber Certificates, OCSP responses SHOULD be published prior to the delivery of the Certificate to the Subscriber. OCSP responses MUST be published no later than 10 minutes after the Subscriber Certificate has been issued.
 
-The CA SHALL update information provided via an Online Certificate Status Protocol at least every four days. OCSP responses from this service MUST have a maximum expiration time of ten days.
+The CA SHALL publish an updated OCSP response for Subscriber Certificates by the earlier of:
+1. 8 hours prior to the nextUpdate field of the previously published OCSP response
+2. If the OCSP response has a validity period, as defined by the difference in time between the thisUpdate and nextUpdate fields, of greater than 16 hours, then the value of the thisUpdate field plus one half of the validity period of the OCSP response.
 
-For the status of Subordinate CA Certificates:
+The CA SHALL publish an updated OCSP response for Subordinate CA Certificates by the earlier of:
+1. 24 hours after revoking a Subordinate CA Certificate.
+2. 365 days
 
-The CA SHALL update information provided via an Online Certificate Status Protocol at least (i) every twelve months and (ii) within 24 hours after revoking a Subordinate CA Certificate.
+If a Delegated OCSP Responder Certificate is used, the Responder Certificate MUST be directly signed and issued by the Issuer Certificate of the Subscriber Certificate it provides status information for. The Delegated OCSP Responder Certificate MUST contain the id-pkix-ocsp-nocheck extension as defined in RFC6960. The Delegated OCSP Responder Certificate MUST NOT have a Validity Period greater than 365 days, and SHOULD NOT have a validity period greater than 90 days.
 
 If the OCSP responder receives a request for status of a certificate that has not been issued, then the responder SHOULD NOT respond with a "good" status. The CA SHOULD monitor the responder for such requests as part of its security response procedures.
 
-Effective 1 August 2013, OCSP responders for CAs which are not Technically Constrained in line with Section 7.1.5 MUST NOT respond with a "good" status for such certificates.
+OCSP responders for CAs which are not Technically Constrained in line with Section 7.1.5 MUST NOT respond with a "good" status for such certificates.
 
 ### 4.9.11 Other forms of revocation advertisements available
 If the Subscriber Certificate is for a high-traffic FQDN, the CA MAY rely on stapling, in accordance with [RFC4366], to distribute its OCSP responses. In this case, the CA SHALL ensure that the Subscriber "staples" the OCSP response for the Certificate in its TLS handshake. The CA SHALL enforce this requirement on the Subscriber either contractually, through the Subscriber Agreement or Terms of Use, or by technical review measures implemented by the CA.
@@ -1357,9 +1353,7 @@ b. cRLDistributionPoints
 
 c. authorityInformationAccess
 
-    With the exception of stapling, which is noted below, this extension MUST be present. It MUST NOT be marked critical, and it MUST contain the HTTP URL of the Issuing CA's OCSP responder (accessMethod = 1.3.6.1.5.5.7.48.1). It SHOULD also contain the HTTP URL of the Issuing CA's certificate (accessMethod = 1.3.6.1.5.5.7.48.2).
-
-    The HTTP URL of the Issuing CA's OCSP responder MAY be omitted, provided that the Subscriber "staples" the OCSP response for the Certificate in its TLS handshakes [RFC4366].
+    This extension MUST be present. It MUST NOT be marked critical, and it MUST contain the HTTP URL of the Issuing CA's OCSP responder (accessMethod = 1.3.6.1.5.5.7.48.1). It SHOULD also contain the HTTP URL of the Issuing CA's certificate (accessMethod = 1.3.6.1.5.5.7.48.2).
 
 d. basicConstraints
 
@@ -1595,9 +1589,21 @@ The issuing CA SHALL document in its Certificate Policy or Certification Practic
 
 ## 7.3 OCSP profile
 
+1. All OCSP responses MUST conform with RFC6960 and be the profile specified in RFC5019.
+2. Responses MUST be pre-produced as specified in RFC5019.
+3. Responses MUST have the same value for the producedAt and thisUpdate times.
+4. The difference in time between the thisUpdate and nextUpdate fields MUST be greater than or equal to 8 hours and MUST NOT be greater than or equal to 192 hours (7 days).
+5. For OCSP responses directly signed by the issuing CA, the response MUST NOT include any certificates within the BasicOCSPResponse's certs field.
+6. For OCSP responses signed by a Delegated OCSP Responder Certificate, the response MUST only include the Delegated OCSP Responder Certificate within the BasicOCSPResponse's certs field and MUST NOT include any additional certificates.
+
 ### 7.3.1 Version number(s)
 
+OCSP responders MUST support v1 requests, as specified in RFC6960. OCSP responders MUST produce v1 responses, as specified in RFC6960.
+
 ### 7.3.2 OCSP extensions
+
+1. As specified in RFC5019 for pre-produced responses, responses MUST NOT include the id-pkix-ocsp-nonce extension.
+2. Responses MAY include an OCSP extension with the OID 1.3.6.1.4.1.11129.2.4.5. If such an extension is included, it MUST conform to RFC6962.
 
 # 8. COMPLIANCE AUDIT AND OTHER ASSESSMENTS
 The CA SHALL at all times:
