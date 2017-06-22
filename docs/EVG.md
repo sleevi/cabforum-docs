@@ -321,7 +321,7 @@ Each CA must develop, implement, enforce, display prominently on its Web site, a
 
 Each CA must publicly disclose its Certificate Policy and/or Certification Practice Statement through an appropriate and readily accessible online means that is available on a 24x7 basis. The CA SHALL publicly disclose its CA business practices to the extent required by the CA's selected audit scheme (see Section 17.1).
 
-Effective as of 8 December 2017, the CA's Certificate Policy and/or Certification Practice Statement MUST be structured in accordance with RFC 3647. Prior to 8 December 2017, the CA's Certificate Policy and/or Certification Practice Statement MUST be structured in accordance with either RFC 2527 or RFC 3647. The Certificate Policy and/or Certification Practice Statement MUST include all material required by RFC 3647 or, if structured as such, RFC 2527.
+Effective as of 1 February 2018, the CA's Certificate Policy and/or Certification Practice Statement MUST be structured in accordance with RFC 3647. Prior to 1 February 2018, the CA's Certificate Policy and/or Certification Practice Statement MUST be structured in accordance with either RFC 2527 or RFC 3647. The Certificate Policy and/or Certification Practice Statement MUST include all material required by RFC 3647 or, if structured as such, RFC 2527.
 
 ## 8.3.  Commitment to Comply with Recommendations
 
