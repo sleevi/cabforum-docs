@@ -869,7 +869,9 @@ The CA SHALL publish an updated OCSP response for Subordinate CA Certificates by
 2. 3 months
 3. 92 days
 
-If a Delegated OCSP Responder Certificate is used, the Responder Certificate MUST be directly signed and issued by the Issuer CA of the Subscriber Certificate it provides status information for, using the same issuer name and key. The Delegated OCSP Responder Certificate MUST contain the id-pkix-ocsp-nocheck extension as defined in RFC6960. The Delegated OCSP Responder Certificate MUST NOT have a Validity Period greater than 365 days, and SHOULD NOT have a validity period greater than the earlier of 3 months or 92 days.
+If a Delegated OCSP Responder Certificate is used, the Responder Certificate MUST be directly signed and issued by the Issuer CA of the Subscriber Certificate it provides status information for, using the same issuer name and key. The Delegated OCSP Responder Certificate MUST contain the id-pkix-ocsp-nocheck extension as defined in RFC6960. The Delegated OCSP Responder Certificate MUST NOT have a Validity Period greater than 365 days, and SHOULD NOT have a validity period greater than the earlier of 3 months or 92 days. All certificates issued by the CA for the Delegated OCSP Responder's public key MUST contain an extended key usage certificate extension whose only value is id-kp-OCSPSigning, as specified in RFC6960.
+
+If a Delegated OCSP Responder Certificate is not used, or if the validity period of the Delegated OCSP Responder Certificate is greater than 30 days, the OCSP response MUST be pre-produced as specified in RFC5019.
 
 If the OCSP responder receives a request for status of a certificate that has not been issued, then the responder SHOULD NOT respond with a "good" status. The CA SHOULD monitor the responder for such requests as part of its security response procedures.
 
@@ -1591,11 +1593,10 @@ The issuing CA SHALL document in its Certificate Policy or Certification Practic
 ## 7.3 OCSP profile
 
 1. All OCSP responses MUST conform with RFC6960 and be the profile specified in RFC5019.
-2. Responses MUST be pre-produced as specified in RFC5019.
-3. Responses MUST have the same value for the producedAt and thisUpdate times.
-4. The difference in time between the thisUpdate and nextUpdate fields MUST be greater than or equal to 8 hours and MUST NOT be greater than or equal to 192 hours (7 days).
-5. For OCSP responses directly signed by the issuing CA, the response MUST NOT include any certificates within the BasicOCSPResponse's certs field.
-6. For OCSP responses signed by a Delegated OCSP Responder Certificate, the response MUST only include the Delegated OCSP Responder Certificate within the BasicOCSPResponse's certs field and MUST NOT include any additional certificates.
+2. Responses MUST have the same value for the producedAt and thisUpdate times.
+3. Except for responses indicating a Revoked status, the difference in time between the thisUpdate and nextUpdate fields MUST be greater than or equal to 8 hours and MUST NOT be greater than or equal to 192 hours (7 days).
+4. For OCSP responses directly signed by the issuing CA, the response MUST NOT include any certificates within the BasicOCSPResponse's certs field.
+5. For OCSP responses signed by a Delegated OCSP Responder Certificate, the response MUST only include the Delegated OCSP Responder Certificate within the BasicOCSPResponse's certs field and MUST NOT include any additional certificates.
 
 ### 7.3.1 Version number(s)
 
