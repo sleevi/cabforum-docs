@@ -866,9 +866,10 @@ The CA SHALL publish an updated OCSP response for Subscriber Certificates by the
 
 The CA SHALL publish an updated OCSP response for Subordinate CA Certificates by the earlier of:
 1. 24 hours after revoking a Subordinate CA Certificate.
-2. 365 days
+2. 3 months
+3. 92 days
 
-If a Delegated OCSP Responder Certificate is used, the Responder Certificate MUST be directly signed and issued by the Issuer CA of the Subscriber Certificate it provides status information for, using the same issuer name and key. The Delegated OCSP Responder Certificate MUST contain the id-pkix-ocsp-nocheck extension as defined in RFC6960. The Delegated OCSP Responder Certificate MUST NOT have a Validity Period greater than 365 days, and SHOULD NOT have a validity period greater than 90 days.
+If a Delegated OCSP Responder Certificate is used, the Responder Certificate MUST be directly signed and issued by the Issuer CA of the Subscriber Certificate it provides status information for, using the same issuer name and key. The Delegated OCSP Responder Certificate MUST contain the id-pkix-ocsp-nocheck extension as defined in RFC6960. The Delegated OCSP Responder Certificate MUST NOT have a Validity Period greater than 365 days, and SHOULD NOT have a validity period greater than the earlier of 3 months or 92 days.
 
 If the OCSP responder receives a request for status of a certificate that has not been issued, then the responder SHOULD NOT respond with a "good" status. The CA SHOULD monitor the responder for such requests as part of its security response procedures.
 
