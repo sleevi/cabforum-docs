@@ -3,7 +3,7 @@
 
 **BYLAWS OF THE CA/BROWSER FORUM** 
 
-**Version 1.5 - Adopted effective as of 31 January 2017**
+**Version 1.7 - Adopted effective as of 6 July 2017**
 
 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
@@ -48,9 +48,9 @@ The Chair will read an antitrust compliance statement at the start of all Forum 
 
 (a)        CA/Browser Forum members shall meet at least one of the following criteria.
 
-(1)        __Issuing CA__: The member organization operates a certification authority that has a current and successful WebTrust for CAs audit, or ETSI 102042 or ETSI 101456 audit report prepared by a properly-qualified auditor, and that actively issues certificates to Web servers that are openly accessible from the Internet using a browser created by a Browser member.  Applicants that are not actively issuing certificates but otherwise meet membership criteria may be granted Associate Member status under Bylaw Sec. 3.1 for a period of time to be designated by the Forum.
+(1)        __Issuing CA__: The member organization operates a certification authority that has a current and successful WebTrust for CAs audit, or ETSI 102042 or ETSI 101456 audit report prepared by a properly-qualified auditor, and that actively issues certificates to Web servers that are openly accessible from the Internet, such certificates being treated as valid when using a browser created by a Browser member.  Applicants that are not actively issuing certificates but otherwise meet membership criteria may be granted Associate Member status under Bylaw Sec. 3.1 for a period of time to be designated by the Forum.
 
-(2)        __Root CA__: The member organization operates a certification authority that has a current and successful WebTrust for CAs, or ETSI 102042 or ETSI 101456 audit report prepared by a properly-qualified auditor, and that actively issues certificates to subordinate CAs that, in turn, actively issue certificates to Web servers that are openly accessible from the Internet using a browser created by a Browser member.  Applicants that are not actively issuing certificates but otherwise meet membership criteria may be granted Associate Member status under Bylaw Sec. 3.1 for a period of time to be designated by the Forum.
+(2)        __Root CA__: The member organization operates a certification authority that has a current and successful WebTrust for CAs, or ETSI 102042 or ETSI 101456 audit report prepared by a properly-qualified auditor, and that actively issues certificates to subordinate CAs that, in turn, actively issue certificates to Web servers that are openly accessible from the Internet, such certificates being treated as valid when using a browser created by a Browser member.  Applicants that are not actively issuing certificates but otherwise meet membership criteria may be granted Associate Member status under Bylaw Sec. 3.1 for a period of time to be designated by the Forum.
 
 (3)        __Browser__: The member organization produces a software product intended for use by the general public for browsing the Web securely.
 
@@ -77,13 +77,34 @@ CA Applicants should supply the following additional information:
 
 (c)        An Applicant shall become a Member once the Forum has determined by consensus among the Members during a teleconference or meeting that the Applicant meets all of the requirements of subsection (a) or, upon the request of any Member, by a Ballot among the Members.  Acceptance by consensus shall be determined or a Ballot of Members shall be held as soon as the Applicant indicates that it has presented all information required under subsection (b) and has responded to all follow-up questions from the Forum and the Member has complied with the requirements of Section 5.5.
 
-**2.2        General Provisions Applicable to all Ballots**
+**2.2  Ending Forum Membership**
 
-The following rules will apply to all ballots, including Draft Guideline Ballots (defined in Section 2.3).
+Forum Members may resign from the Forum at any time. Resignation does not prevent a member potentially having continuing obligations, under the Forum's IPR Policy or any other document.
+
+(a) Browser: A Browser member's membership will automatically cease if any of the following become true:
+1.	it stops providing updates for its membership-qualifying software product; or 
+2.	six months have elapsed since the last such published update.
+
+(b) Issuing CA or Root CA: A CA member's membership may be suspended if any of the following become true:
+1.	it fails to pass its membership-qualifying audit;
+2.	its membership-qualifying audit is revoked, rescinded or withdrawn;
+3.	fifteen months have elapsed since the end of the Audit Period of its last successful membership-qualifying audit;
+4.	it stops issuing certificates to Web servers that are openly accessible from the Internet; or
+5.	it is no longer the case that its currently-issued certificates are treated as valid by at least one Browser member. 
+
+Any Forum Member who believes one of the above circumstances is true of a CA Forum Member may report it on the Public Mail List. The Chair will then investigate, including asking the CA for an explanation or appropriate documentation. If evidence of continued qualification for membership is not forthcoming within five working days, the Chair will announce that the member is suspended, such announcement to include the clause(s) from the above list under which the suspension has been made.
+
+A suspended CA Forum Member who believes it has now re-met the membership criteria under the relevant clauses shall post evidence to the Public Mail List. The Chair will examine the evidence and unsuspend the member, or not, by public announcement. A CA Forum Member's membership will automatically cease six months after it becomes suspended if it has not re-met the membership criteria by that time.
+
+While suspended, CAs may participate in meetings and on the Forum's discussion lists, but not propose or second ballots or take part in any form of voting. Votes cast before a member's suspension is announced will stand.
+
+**2.3        General Provisions Applicable to All Ballots**
+
+The following rules will apply to all ballots, including Draft Guideline Ballots (defined in Section 2.4).
 
 (a)        Only votes by Members shall be accepted.
 
-(b)        Only one vote per Member company shall be accepted; representatives of corporate affiliates shall not vote.
+(b)        Only one vote per Member company shall be accepted; representatives of Affiliates shall not vote.
 
 (c)        A representative of any Member can call for a proposed ballot to be published for discussion and comment by the membership. Any proposed ballot needs two endorsements by other Members in order to proceed. The discussion period then shall take place for at least seven but no more than 14 calendar days before votes are cast.  The proposer of the ballot will designate the length of the discussion period, and each ballot shall clearly state the start and end dates and times (including time zone) for both the discussion period and the voting period.
 
@@ -97,17 +118,17 @@ The following rules will apply to all ballots, including Draft Guideline Ballots
 
 (h)        The Chair will tabulate and announce the results within 3 business days of the close of the voting period.
 
-(i)        The Chair may delegate any of his/her duties under this Section 2.2 and Section 2.3 to the Vice Chair as necessary, or the Vice Chair may otherwise execute the duties and obligations of the Chair as provided in Section 4.1(a) of these Bylaws.
+(i)        The Chair may delegate any of his/her duties under this Section 2.3 and Section 2.4 to the Vice Chair as necessary, or the Vice Chair may otherwise execute the duties and obligations of the Chair as provided in Section 4.1(a) of these Bylaws.
 
-**2.2        Requirements for Draft Guideline Ballots**
+**2.4        Requirements for Draft Guideline Ballots**
 
-This section applies to any ballot that proposes a Final Guideline or a Final Maintenance Guideline (a “Draft Guideline Ballot”), all as defined under the Forum’s IPR Policy.  Draft Guideline Ballots must comply with the following rules in addition to the requirements set forth in Section 2.2 above.
+This section applies to any ballot that proposes a Final Guideline or a Final Maintenance Guideline (a “Draft Guideline Ballot”), all as defined under the Forum’s IPR Policy.  Draft Guideline Ballots must comply with the following rules in addition to the requirements set forth in Section 2.3 above.
 
-(a)        A Draft Guideline Ballot will clearly indicate whether it is proposing a Final Guideline or a Final Maintenance Guideline.  If the Draft Guideline Ballot is proposing a Final Guideline, such ballot will include the full text of the Draft Guideline intended to become a Final Guideline.  If the Draft Guideline Ballot is proposing a Final Maintenance Guideline, such ballot will include a redline or comparison showing the set of changes from the Final Guideline section(s) intended to become a Final Maintenance Guideline, and need not include a copy of the full set of guidelines.  Such redline or comparison shall be made against the Final Guideline section(s) as they exist at the time a ballot is proposed, and need not take into consideration other ballots that may be proposed subsequently, except as provided in Section 2.3(j) below.
+(a)        A Draft Guideline Ballot will clearly indicate whether it is proposing a Final Guideline or a Final Maintenance Guideline.  If the Draft Guideline Ballot is proposing a Final Guideline, such ballot will include the full text of the Draft Guideline intended to become a Final Guideline.  If the Draft Guideline Ballot is proposing a Final Maintenance Guideline, such ballot will include a redline or comparison showing the set of changes from the Final Guideline section(s) intended to become a Final Maintenance Guideline, and need not include a copy of the full set of guidelines.  Such redline or comparison shall be made against the Final Guideline section(s) as they exist at the time a ballot is proposed, and need not take into consideration other ballots that may be proposed subsequently, except as provided in Section 2.4(j) below.
 
-(b)        As described in Section 2.2(c), there will be a discussion period of at least seven but no more than 14 calendar days before votes are cast on a Draft Guideline Ballot, with the start and end dates of such discussion period clearly specified in the ballot.
+(b)        As described in Section 2.3(c), there will be a discussion period of at least seven but no more than 14 calendar days before votes are cast on a Draft Guideline Ballot, with the start and end dates of such discussion period clearly specified in the ballot.
 
-(c)        As described in Section 2.2(d), upon completion of such discussion period, Members shall have exactly seven calendar days to vote on a Draft Guideline Ballot, with the deadline clearly communicated in the ballot sent via the Public Mail List. All voting will take place via the Public Mail List.  Votes not submitted to the Public Mail List will not be considered valid, and will not be counted for any purpose.  The Chair may send an email to the Public Mail List reminding Members of when the voting period opens and closes.
+(c)        As described in Section 2.3(d), upon completion of such discussion period, Members shall have exactly seven calendar days to vote on a Draft Guideline Ballot, with the deadline clearly communicated in the ballot sent via the Public Mail List. All voting will take place via the Public Mail List.  Votes not submitted to the Public Mail List will not be considered valid, and will not be counted for any purpose.  The Chair may send an email to the Public Mail List reminding Members of when the voting period opens and closes.
 
 (d)        The Forum (via the Chair) will tabulate and announce the results within 3 business days of the close of the initial voting period (the “Initial Vote”).  If the Draft Guidelines Ballot does not pass the Initial Vote, the ballot will stop.
 
@@ -121,13 +142,13 @@ This section applies to any ballot that proposes a Final Guideline or a Final Ma
 
 (i)        If Exclusion Notice(s) are filed during the Review Period (as described in Section 4.3 of the IPR Policy), then the results of the Initial Vote are automatically rescinded and deemed null and void, and;
 
-(i)        A Patent Advisory Group (PAG) will be formed, in accordance with Section 7 of the IPR Policy, to address the conflict.  The PAG will make a conclusion as described in Section 7.3.2 of the IPR Policy, and communicate such conclusion to the rest of the Forum, using the Member Mail List and the Public Mail List.; and
+(i)        A Patent Advisory Group (PAG) will be formed, in accordance with Section 7 of the IPR Policy, to address the conflict.  The PAG will make a conclusion as described in Section 7.3.2 of the IPR Policy, and communicate such conclusion to the rest of the Forum, using the Member Mail List and the Public Mail List; and
 
 (ii)        After the PAG provides its conclusion, if the proposer and endorsers decide to proceed with the Draft Guidelines Ballot, and:
 
-(A)        The proposer and endorsers do not make any changes to the Draft Guidelines Ballot, such ballot must go through the steps described in Sections 2.3(b) through (d) above, replacing the “Initial Vote” with a “Second Vote.”  If a Draft Guidelines Ballot passes the Second Vote, then the results of the Second Vote are deemed to be final and approved.  Draft Guidelines then become either Final Guidelines or Final Maintenance Guidelines, as designated in the Draft Guidelines Ballot.  The Chair will notify both the Member Mail List and the Public Mail List of the approval, as well as update the public website of Final Guidelines and Final Maintenance Guidelines; or
+(A)        The proposer and endorsers do not make any changes to the Draft Guidelines Ballot, such ballot must go through the steps described in Sections 2.4(b) through (d) above, replacing the “Initial Vote” with a “Second Vote.”  If a Draft Guidelines Ballot passes the Second Vote, then the results of the Second Vote are deemed to be final and approved.  Draft Guidelines then become either Final Guidelines or Final Maintenance Guidelines, as designated in the Draft Guidelines Ballot.  The Chair will notify both the Member Mail List and the Public Mail List of the approval, as well as update the public website of Final Guidelines and Final Maintenance Guidelines; or
 
-(B)        The proposer and endorsers make changes to the Draft Guidelines Ballot, a new Draft Guidelines Ballot must be proposed, and must go through the steps described in Sections 2.3(a) through (i) above.
+(B)        The proposer and endorsers make changes to the Draft Guidelines Ballot, a new Draft Guidelines Ballot must be proposed, and must go through the steps described in Sections 2.4(a) through (i) above.
 
 (j)        If a ballot is proposed to amend the same section of the Final Guidelines or the Final Maintenance Guidelines as one or more previous ballot(s) that has/have not yet been finally approved, the newly proposed ballot must include information about, and a link to, any such previous ballot(s), and may include provisions to avoid any conflicts relating to such previous ballots.
 
@@ -279,7 +300,15 @@ The Forum procedure for dealing with questions and comments sent to the Question
 
 Nothing in these Bylaws is intended to supersede or replace anything in the IPR Policy. In the event of a conflict between these Bylaws and the IPR Policy, the IPR Policy shall govern.
 
+**6.4 Code of Conduct**
+
+All Members shall abide by the CAB Forum Code of Conduct, which is attached to these Bylaws as Exhibit C.
+
+
+
 **DEFINITIONS**
+
+**Affiliate:** An entity that directly or indirectly controls, is controlled by or is under common control with, a Member. Control for the purposes of this Agreement shall mean direct or indirect beneficial ownership of more than fifty percent of the voting stock, or decision-making authority in the event that there is no voting stock, in an entity.
 
 **Forum Meetings:** Face-to-face meetings of Members as scheduled from time to time.
 
@@ -330,3 +359,45 @@ Title: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 Participant Organization Name (if entity)
 
 **Exhibit B - Project Lifecycle**
+
+**Exhibit C**
+**CAB Forum Code of Conduct (the "Code")**
+
+The CAB Forum (the "Forum") is comprised of a global group of professionals with differences in language, skills, expertise, experience, and backgrounds.  To maintain a professional and productive environment, it is necessary for Members of the Forum to follow the letter and spirit of this Code.  This Code applies to all official Forum activities, such as meetings, teleconferences, mailing lists, conferences, and other Forum functions.  The Forum is committed to maintaining a professional and respectful environment.
+
+All Member representatives are expected to behave in a collegial and professional manner in accordance with this Code.  Members will familiarize their representatives with this Code and require them to comply with the letter and spirit of this Code.
+
+**I.  Conduct.**  The Forum is committed to providing a friendly, safe, and welcoming environment for all, regardless of gender, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, nationality, or other similar characteristic.  The Forum recognizes and appreciates that its participants have diverse languages, backgrounds, experience, and expertise, and expects that all participants will be treated with respect by all other participants.
+
+(a)  In connection with official Forum activities, all Forum participants shall:
+•	Be polite, kind, and courteous to other participants, refraining from insulting remarks on the perceived intelligence or ability of others.
+•	Treat fellow Forum participants with respect, professionalism, courtesy, and reasonableness.  
+•	Respect that people have differences of opinion, and that there is seldom unanimous agreement on a single "correct" answer.  Be willing to compromise and agree to disagree.  
+
+(b)  In connection with official Forum activities, all Forum participants shall refrain from conduct such as:  
+•	Threatening violence towards anyone.  
+•	Discriminating against anyone on the basis of personal characteristics or group membership.
+•	Harassing or bullying anyone verbally, physically, or sexually.
+•	Launching barbs at others.  [Note:  a "barb" is an obviously or openly unpleasant or carping remark.]
+•	Touching another person in a physically inappropriate way. 
+•	Deliberately intimidating or stalking another person (in-person, online, or by other means).
+•	Inappropriately disrupting or impeding official Forum events, including meetings, talks, and presentations.  For purposes of this Code, "inappropriate disruption" would include aggressive, violent, and abusive conduct that prevents an official Forum event from occurring or proceeding.
+•	Spamming, trolling, flaming, baiting, and other similar behavior inappropriately directed towards an individual.
+•	Advocating for, or encouraging, any of the above behavior.
+
+(c)  All Forum participants should promote the rules of this Code and take action to bring discussions back into compliance with the Code whenever violations are observed.
+
+(d)  Forum participants should stick to ideological, conceptual discussions and avoid engaging in offensive or sensitive personal discussions, particularly if they're off-topic; such personal discussions can lead to unnecessary arguments, hurt feelings, and damaged trust. 
+
+**II.  Moderation.**  These are the policies for upholding the Code.
+
+(a) Resist the urge to be defensive.  Remember that it's your responsibility to clearly communicate your message to your fellow participants. Everyone wants to get along and we are all in the Forum first and foremost because we want to talk about standards and everything that involves. Other participants will be eager to assume good intent and forgive as long as you have earned their trust.
+
+(b)  Participants should inform the Chair, Vice Chair, and/or a Working Group Chair immediately if they feel they have been, or are being, harassed or made uncomfortable by a Forum member. Intimidation, personal attacks, and retaliation of any kind will not be tolerated. 
+
+(c)  Any Forum participant may report, in good faith, a perceived violation of the Code to the Forum Chair or Vice Chair, or to a Working Group Chair (each, a "Code Liaison").  One or more Code Liaison(s) will work with the reported Forum participant to determine whether a violation of the Code has occurred and, if so, how to resolve it.  Resolution may also include appropriate executives from the Forum participant's Member company, as appropriate.  If the reported Forum participant, Member executives, and the Code Liaison(s) are unable to resolve the issue, any of the foregoing may request the assistance of a reasonably acceptable independent third party (such as an Interested Party or WebTrust) to assist with the resolution. 
+
+(d)  Members agree to take appropriate action in the event any of their Member representatives violate the Code.  Such action could include warning, reprimanding, suspending, removing or replacing the Member representative who has violated the Code, depending on the severity of the violation.  Depending on the number and severity of violations, the Forum may impose consequences such as excluding a Member representative from certain meetings, removing a Member representative from a mailing list, and suspending a Member representative from certain Forum activities.  
+
+Adapted from the WHATWG Code of Conduct [https://wiki.whatwg.org/wiki/Code_of_Conduct], the W3C Code of Ethics and Professional Conduct [https://www.w3c.org/Consortium/cepc/], and the Citizen Code of Conduct [citizencodeofconduct.org].
+
