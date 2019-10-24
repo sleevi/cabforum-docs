@@ -1611,7 +1611,10 @@ b. semantics that, if included, will mislead a Relying Party about the certifica
 For purposes of clarification, a Precertificate, as described in RFC 6962 - Certificate Transparency, shall not be considered to be a "certificate" subject to the requirements of RFC 5280 - Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile under these Baseline Requirements.
 
 ### 7.1.3 Algorithm object identifiers
-CAs MUST NOT issue any Subscriber certificates or Subordinate CA certificates using the SHA-1 hash algorithm. CAs MAY issue Root CA Certificates or Subordinate CA Certificates that are Cross Certificates using the SHA-1 hash algorithm.
+CAs MUST NOT issue any Subscriber certificates or Subordinate CA certificates using the SHA-1 hash algorithm.
+CAs MAY issue Root CA Certificates or Subordinate CA Certificates that are Cross Certificates using the SHA-1 hash algorithm.
+
+CAs MAY continue to use their existing SHA-1 Root Certificates.
 
 Subscriber certificates SHOULD NOT chain up to a SHA-1 Subordinate CA Certificate.
 
