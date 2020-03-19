@@ -96,8 +96,8 @@ In addition to these primary deliverables, the SMCWG MAY also address:
   natural person and legal identity information.
 
 Deliverables of the SMCWG SHALL be constrained to those certificates
-technically capable of issuing certificates with the emailProtection
-(OID: 1.3.6.1.5.5.7.3.4) Extended Key Usage (EKU).
+that contain the emailProtection (OID: 1.3.6.1.5.5.7.3.4) or that are technically
+capable of such issuance.
 
 ### 2. Out of Scope
 
