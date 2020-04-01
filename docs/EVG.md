@@ -82,7 +82,7 @@ The CA/Browser Forum is a voluntary open organization of certification authoriti
 
 | **Compliance** | **Section(s)** | **Summary Description (See Full Text for Details)** |
 | --- | --- | --- |
-| 2020-01-31 | 9.2.8 | If subject:organizationIdentifier is present, the Subject Organization Identifier Extension MUST be present |
+| 2020-01-31 | 9.2.8 | If subject:organizationIdentifier is present, the CA/Browser Forum Organization Identifier Extension MUST be present |
 
 **Implementers' Note:**  Version 1.3 of these EV Guidelines was published on 20 November 2010 and supplemented through May 2012 when version 1.4 was published.  ETSI TS 102 042 and ETSI TR 101 564 Technical Report: Guidance on ETSI TS 102 042 for Issuing Extended Validation Certificates for Auditors and CSPs reference version 1.3 of these EV Guidelines, and ETSI Draft EN 319 411-1 references version 1.4.  Version 1.4.5 of Webtrust(r) for Certification Authorities – Extended Validation Audit Criteria references version 1.4.5 of these EV Guidelines.  As illustrated in the Document History table above, the CA/Browser Forum continues to improve relevant industry guidelines, including this document, the Baseline Requirements, and the Network and Certificate System Security Requirements.  We encourage all CAs to conform to each revision on the date specified without awaiting a corresponding update to an applicable audit criterion.  In the event of a conflict between an existing audit criterion and a guideline revision, we will communicate with the audit community and attempt to resolve any uncertainty. We will respond to implementation questions directed to questions@cabforum.org.  Our coordination with compliance auditors will continue as we develop guideline revision cycles that harmonize with the revision cycles for audit criteria, the compliance auditing periods and cycles of CAs, and the CA/Browser Forum's guideline implementation dates.
 
@@ -658,7 +658,7 @@ If a CA includes an extension in a certificate that has a Certificate field whic
 
 **Contents:** This extension MUST contain one or more host Domain Name(s) owned or controlled by the Subject and to be associated with the Subject's server.  Such server MAY be owned and operated by the Subject or another entity (e.g., a hosting service).  Wildcard certificates are not allowed for EV Certificates.
 
-### 9.8.2 CA/Browser Form Organization Identifier Extension
+### 9.8.2 CA/Browser Forum Organization Identifier Extension
 
 **Extension Name:** _cabfOrganizationIdentifier_ (OID: 2.23.140.3.1)
 
@@ -666,7 +666,7 @@ If a CA includes an extension in a certificate that has a Certificate field whic
               
 **Required/Optional:** Optional (but see below)
 
-**Contents:** If the subject:organizationIdentifier is present, this field SHOULD be present. Effective January 31, 2020, if the subject:organizationIdentifier field is present, this field MUST be present.
+**Contents:** If the subject:organizationIdentifier is present, this field MUST be present.
 
 If present, this extension MUST contain a Registration Reference for a Legal Entity assigned in accordance to the identified Registration Scheme.
 
@@ -1846,7 +1846,7 @@ guidelines:
 
    Where the Subject Jurisdiction of Incorporation or Registration Field in 9.2.4 
    includes more than the country code, the additional locality information shall
-   be included as specified in sections 9.2.8 and/or 9.8.1.
+   be included as specified in sections 9.2.8 and/or 9.8.2.
 
 **VAT**: Reference allocated by the national tax authorities to a Legal Entity. This 
    information shall be validated using information provided by the national tax 
