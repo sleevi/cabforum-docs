@@ -12,13 +12,13 @@
 
 **CA/Browser Forum**
 
-**Version 1.6.7**
+**Version 1.6.9**
 
-**December 19, 2019**
+**March 27, 2020**
 
 **www.cabforum.org**
 
-Copyright 2019 CA/Browser Forum
+Copyright 2020 CA/Browser Forum
 This work is licensed under the Creative Commons Attribution 4.0 International license.
 
 
@@ -121,6 +121,9 @@ The following Certificate Policy identifiers are reserved for use by CAs as an o
 | 1.6.6 | SC19 | Phone Contact with DNS CAA Phone Contact v2 | 20-May-2019	| 9-Sep-2019 |
 | 1.6.7 | SC23 | Precertificates | 14-Nov-2019	| 19-Dec-2019 |
 | 1.6.7 | SC24 | Fall Cleanup v2 | 12-Nov-2019	| 19-Dec-2019 |
+| 1.6.8 | SC25 | Define New HTTP Domain Validation Methods v2 | 31-Jan-2020	| 3-Mar-2020 |
+| 1.6.9 | SC27 | Version 3 Onion Certificates | 19-Feb-2020	| 27-Mar-2020 |
+
 
 \* Effective Date and Additionally Relevant Compliance Date(s)
 
@@ -155,6 +158,7 @@ The following Certificate Policy identifiers are reserved for use by CAs as an o
 |2019-06-01	| 3.2.2.4.3	| CAs SHALL NOT perform validations using this method after May 31, 2019.  Completed validations using this method SHALL continue to be valid for subsequent issuance per the applicable certificate data reuse periods.
 |2019-08-01	| 3.2.2.5	| CAs SHALL maintain a record of which IP validation method, including the relevant BR version number, was used to validate every IP Address |
 |2019-08-01	| 3.2.2.5.4	| CAs SHALL NOT perform validations using this method after July 31, 2019.  Completed validations using this method SHALL NOT be re-used for certificate issuance after July 31, 2019. Any certificate issued prior to August 1, 2019 containing an IP Address that was validated using any method that was permitted under the prior version of this section 3.2.2.5 MAY continue to be used without revalidation until such certificate naturally expires |
+|2020-06-03	| 3.2.2.4.6	| CAs MUST NOT perform validation using this method after 3 months from the IPR review date of Ballot SC25 |
 
 ## 1.3 PKI Participants
 The CA/Browser Forum is a voluntary organization of Certification Authorities and suppliers of Internet browser and other relying-party software applications.
@@ -577,8 +581,10 @@ If the subject:countryName field is present, then the CA SHALL verify the countr
 
 This section defines the permitted processes and procedures for validating the Applicant's ownership or control of the domain.
 
-The CA SHALL confirm that prior to issuance, the CA has validated each Fully-Qualified Domain Name (FQDN) listed in the Certificate using at least one of the methods listed below.
-
+The CA SHALL confirm that prior to issuance, the CA has validated each Fully-Qualified Domain Name (FQDN) listed in the Certificate as follows:
+1.  When the FQDN does not contain "onion" as the rightmost label, the CA SHALL validate the FQDN using at least one of the methods listed below; and
+1.  When the FQDN contains "onion" as the rightmost label, the CA SHALL validate the FQDN in accordance with Appendix C.
+ 
 Completed validations of Applicant authority may be valid for the issuance of multiple Certificates over time. In all cases, the validation must have been initiated within the time period specified in the relevant requirement (such as Section 4.2.1 of this document) prior to Certificate issuance. For purposes of domain validation, the term Applicant includes the Applicant's Parent Company, Subsidiary Company, or Affiliate.
 
 CAs SHALL maintain a record of which domain validation method, including relevant BR version number, they used to validate every domain.
@@ -644,6 +650,8 @@ Confirming the Applicant's control over the FQDN by confirming one of the follow
 2.	The presence of the Request Token or Random Value contained in the content of a file where the Request Token or Random Value MUST NOT appear in the request.
 
 If a Random Value is used, the CA SHALL provide a Random Value unique to the Certificate request and SHALL not use the Random Value after the longer of (i) 30 days or (ii) if the Applicant submitted the Certificate request, the timeframe permitted for reuse of validated information relevant to the certificate (such as in Section 4.2.1 of these Guidelines or Section 11.14.3 of the EV Guidelines).
+
+CAs MUST NOT perform validation using this method after 3 months from the IPR review date of Ballot SC25. CAs MAY continue to re-use information and validations for domains validated under this method per the applicable certificate data reuse periods.
 
 **Note:** Once the FQDN has been validated using this method, the CA MAY also issue Certificates for other FQDNs that end with all the labels of the validated FQDN.  This method is suitable for validating Wildcard Domain Names.
 
@@ -731,6 +739,46 @@ The CA MUST NOT be transferred or request to be transferred as this phone number
 In the event of reaching voicemail, the CA may leave the Random Value and the ADN(s) being validated. The Random Value MUST be returned to the CA to approve the request.
 
 The Random Value SHALL remain valid for use in a confirming response for no more than 30 days from its creation. The CPS MAY specify a shorter validity period for Random Values.
+
+**Note:** Once the FQDN has been validated using this method, the CA MAY also issue Certificates for other FQDNs that end with all the labels of the validated FQDN. This method is suitable for validating Wildcard Domain Names.
+
+#### 3.2.2.4.18 Agreed-Upon Change to Website v2
+
+Confirming the Applicant's control over the FQDN by verifying that the Request Token or Random Value is contained in the contents of a file. 
+1.	The entire Request Token or Random Value MUST NOT appear in the request used to retrieve the file, and
+2.	the CA MUST receive a successful HTTP response from the request (meaning a 2xx HTTP status code must be received).
+
+The file containing the Request Token or Random Number: 
+1.	MUST be located on the Authorization Domain Name, and
+2.	MUST be located under the "/.well-known/pki-validation" directory, and
+3.	MUST be retrieved via either the "http" or "https" scheme, and
+4.	MUST be accessed over an Authorized Port.
+
+If the CA follows redirects the following apply:
+1.	Redirects MUST be initiated at the HTTP protocol layer (e.g. using a 3xx status code).
+2.	Redirects MUST be the result of an HTTP status code result within the 3xx Redirection class of status codes, as defined in RFC 7231, Section 6.4.
+3.	Redirects MUST be to resource URLs with either via the "http" or "https" scheme.
+4.	Redirects MUST be to resource URLs accessed via Authorized Ports.
+
+If a Random Value is used, then:
+1.	The CA MUST provide a Random Value unique to the certificate request.
+2.	The Random Value MUST remain valid for use in a confirming response for no more than 30 days from its creation. The CPS MAY specify a shorter validity period for Random Values, in which case the CA MUST follow its CPS.
+
+**Note:** Once the FQDN has been validated using this method, the CA MAY also issue Certificates for other FQDNs that end with all the labels of the validated FQDN. This method is suitable for validating Wildcard Domain Names.
+
+#### 3.2.2.4.19 Agreed-Upon Change to Website - ACME
+
+Confirming the Applicant's control over a FQDN by validating domain control of the FQDN using the ACME HTTP Challenge method defined in section 8.3 of RFC 8555. The following are additive requirements to RFC 8555.
+
+The CA MUST receive a successful HTTP response from the request (meaning a 2xx HTTP status code must be received).
+
+The token (as defined in RFC 8555, section 8.3) MUST NOT be used for more than 30 days from its creation. The CPS MAY specify a shorter validity period for Random Values, in which case the CA MUST follow its CPS.
+
+If the CA follows redirects:
+1.	Redirects MUST be initiated at the HTTP protocol layer (e.g. using a 3xx status code).
+2.	Redirects MUST be the result of an HTTP status code result within the 3xx Redirection class of status codes, as defined in RFC 7231, Section 6.4.
+3.	Redirects MUST be to resource URLs with either via the "http" or "https" scheme.
+4.	Redirects MUST be to resource URLs accessed via Authorized Ports.
 
 **Note:** Once the FQDN has been validated using this method, the CA MAY also issue Certificates for other FQDNs that end with all the labels of the validated FQDN. This method is suitable for validating Wildcard Domain Names.
 
@@ -2107,3 +2155,52 @@ The DNS TXT record MUST be placed on the "_validation-contactemail" subdomain of
 
 ### B.2.2. DNS TXT Record Phone Contact
 The DNS TXT record MUST be placed on the "_validation-contactphone" subdomain of the domain being validated.  The entire RDATA value of this TXT record MUST be a valid Global Number as defined in RFC 3966 section 5.1.4, or it cannot be used.
+
+# APPENDIX C – Issuance of Certificates for .onion Domain Names
+
+This appendix defines permissible verification procedures for including one or more RFC 7686 ".onion" special-use Domain Names in a Certificate.
+
+1. The Domain Name MUST contain at least two labels, where the right-most label is "onion", and the label immediately preceding the right-most "onion" label is a valid Version 3 Onion Address, as defined in section 6 of the Tor Rendezvous Specification - Version 3 located at https://spec.torproject.org/rend-spec-v3.
+
+2. The CA MUST verify the Applicant’s control over the .onion Domain Name using at least one of the methods listed below:
+
+	a. The CA MAY verify the Applicant’s control over the .onion service by using method 3.2.2.4.6, Agreed‐Upon Change to Website. If this method is replaced by a newer version(s) of Agreed-Upon Change to Website, the timelines for use of new and existing version of this method that are defined in section 3.2.2.4 SHALL apply.
+	
+	b. The CA MAY verify the Applicant's control over the .onion service by having the Applicant provide a Certificate Request signed using the .onion public key if the Attributes section of the certificationRequestInfo contains:
+
+	(i) A caSigningNonce attribute that contains a Random Value that is generated by the CA; and
+	(ii) An applicantSigningNonce attribute that contains a single value with at least 64-bits of entropy that is generated by the Applicant.
+
+	The signing nonce attributes have the following format:
+```
+caSigningNonce ATTRIBUTE ::= {
+
+| WITH SYNTAX | OCTET STRING |
+| --- | --- |
+| EQUALITY MATCHING RULE | octetStringMatch |
+| SINGLE VALUE | TRUE |
+| ID | { cabf-caSigningNonce } |
+
+}
+
+cabf-caSigningNonce OBJECT IDENTIFIER ::= { cabf 41 }
+
+applicantSigningNonce ATTRIBUTE ::= {
+
+| WITH SYNTAX | OCTET STRING |
+| --- | --- |
+| EQUALITY MATCHING RULE | octetStringMatch |
+| SINGLE VALUE | TRUE |
+| ID | { cabf-applicantSigningNonce } |
+
+}
+
+cabf-applicantSigningNonce OBJECT IDENTIFIER ::= { cabf 42 }
+```
+
+The Random Value SHALL remain valid for use in a confirming response for no more than 30 days from its creation. The CPS MAY specify a shorter validity period for Random Values.
+
+The CA MAY include a wildcard character in the Subject Alternative Name Extension and Subject Common Name Field as the left-most character in the .onion Domain Name provided inclusion of the wildcard character complies with Section 3.2.2.6 of these Requirements.
+
+3. When a Certificate includes an FQDN where "onion" is in the right-most label of the Domain Name, the Domain Name shall not be considered an Internal Name provided that the Certificate was issued in compliance with this Appendix C.
+
