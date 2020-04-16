@@ -89,11 +89,9 @@ The primary deliverable shall be scoped as follows:
   be present)
 - CA operational practices, physical/logical security, etc.
 
-In addition to these primary deliverables, the SMCWG MAY also address:
+In addition to the primary deliverable, the SMCWG MAY also address:
 - Identity validation for natural persons and legal entities, in the context of
-  S/MIME certificates.
-- Certificate profiles for S/MIME certificates to convey information related to
-  natural person and legal identity information.
+  S/MIME certificates
 
 Deliverables of the SMCWG SHALL be constrained to those certificates
 that contain the emailProtection (OID: 1.3.6.1.5.5.7.3.4) or that are technically
@@ -168,7 +166,7 @@ forth in the Bylaws.
    * The organization name, as they wish it to appear on the Forum Web site and
      in official Forum documents.
    * URL of the applicant’s main Web site.
-   * Names and email addresses of desginated representatives who will
+   * Names and email addresses of designated representatives who will
      participate in the Working Group and Forum on behalf of the Member.
    * Emergency contact information for security issues related to certificate
      trust.
@@ -303,10 +301,6 @@ determined.
 The primary deliverable of the SMCWG is set forth in the Scope section, and
 shall include a Draft Guideline be named the "Baseline Requirements for S/MIME
 Certificates".
-
-Following the adoption of such a Draft Guideline, the SMCWG MAY produce
-additional Draft Guidelines to address secondary deliverables and to continue
-the ongoing work in supporting the primary deliverables set forth in the scope.
 
 ### 8. Primary Means of Communication
 
