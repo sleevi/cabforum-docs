@@ -1449,7 +1449,7 @@ For RSA key pairs the CA SHALL:
 * Ensure that the modulus size, in bits, is evenly divisible by 8.
 
 For ECDSA key pairs, the CA SHALL:
-* Ensure that the key represents a valid point on the NIST P-256 or NIST P-384 elliptic curve.
+* Ensure that the key represents a valid point on the NIST P-256, NIST P-384 or NIST P-521 elliptic curve.
 
 No other algorithms or key sizes are permitted.
 
