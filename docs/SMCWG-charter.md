@@ -128,9 +128,9 @@ and Certificate Consumers meeting the eligibility criteria below.
 
 1. A Certificate Issuer eligible for voting membership in the SMCWG MUST have
    a publicly-available audit report or attestation statement based upon a
-   publicly-available audit or attestation scheme relevant to the issuance of
-   S/MIME certificates. This includes, but is not limited to, the following
-   schemes:
+   publicly-available audit criteria or attestation scheme relevant to the
+   issuance of S/MIME certificates. This includes, but is not limited to,
+   the following schemes and criteria:
 
     * WebTrust for CAs v.2.0 or newer; or
     * ETSI EN 319 411-1, which includes normative references to ETSI EN 319 401
