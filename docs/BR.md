@@ -1613,7 +1613,7 @@ g. extkeyUsage (optional/required)
 >
 > For Subordinate CA Certificates that will be used to issue TLS certificates, the value id-kp-serverAuth [RFC5280] and/or id-kp-clientAuth [RFC5280} MUST be present. The values id-kp-emailProtection [RFC5280], id-kp-codeSigning [RFC5280], id-kp-timeStamping [RFC5280], id-kp-OCSPSigning [RFC5280], and anyExtendedKeyUsage [RFC5280] MUST NOT be present. Other values SHOULD NOT be present.
 >
-> For Subordinate CA Certificates that are not used to issue TLS certificates, then the value id-kp-serverAuth [RFC5280] MUST NOT be present. Other values MAY be present, but SHOULD NOT combine multiple independent usages (e.g. including id-kp-timeStamping [RFC5280] with id-kp-OCSPSigning [RFC5280] or id-kp-codeSigning [RFC5280]).
+> For Subordinate CA Certificates that are not used to issue TLS certificates, then the value id-kp-serverAuth [RFC5280] and id-kp-clientAuth [RFC5280} MUST NOT be present. Other values MAY be present, but SHOULD NOT combine multiple independent usages (e.g. including id-kp-timeStamping [RFC5280] with id-kp-OCSPSigning [RFC5280] or id-kp-codeSigning [RFC5280]).
 >
 > _\* While RFC 5280, Section 4.2.1.12, notes that this extension will generally only appear within end-entity certificates, these Requirements make use of this extension to further protect relying parties by limiting the scope of subordinate certificates, as implemented by a number of Application Software Suppliers._
 
@@ -1695,10 +1695,12 @@ The CA SHALL indicate an ECDSA key using the id-ecPublicKey (OID: 1.2.840.10045.
 
 For P-256 keys, the `namedCurve` MUST be secp256r1 (OID: 1.2.840.10045.3.1.7).
 For P-384 keys, the `namedCurve` MUST be secp384r1 (OID: 1.3.132.0.34).
+For P-521 keys, the `namedCurve` MUST be secp521r1 (OID: 1.3.132.0.35).
 
 When encoded, the `AlgorithmIdentifier` for ECDSA keys MUST be byte-for-byte identical with the following hex-encoded bytes:
 * For P-256 keys, `301306072a8648ce3d020106082a8648ce3d030107`.
 * For P-384 keys, `301006072a8648ce3d020106052b81040022`.
+* For P-521 keys, `need to add`.
 
 #### 7.1.3.2 Signature AlgorithmIdentifier
 All objects signed by a CA Private Key MUST conform to these requirements on the use of the `AlgorithmIdentifier` or `AlgorithmIdentifier`-derived type in the context of signatures.
@@ -1788,6 +1790,8 @@ The CA SHALL use the appropriate signature algorithm and encoding based upon the
 If the signing key is P-256, the signature MUST use ECDSA with SHA-256. When encoded, the `AlgorithmIdentifier` MUST be byte-for-byte identical with the following hex-encoded bytes: `300a06082a8648ce3d040302`.
 
 If the signing key is P-384, the signature MUST use ECDSA with SHA-384. When encoded, the `AlgorithmIdentifier` MUST be byte-for-byte identical with the following hex-encoded bytes: `300a06082a8648ce3d040303`.
+
+If the signing key is P-5212, the signature MUST use ECDSA with SHA-512. When encoded, the `AlgorithmIdentifier` MUST be byte-for-byte identical with the following hex-encoded bytes: `need to add`.
 
 ### 7.1.4 Name Forms
 
