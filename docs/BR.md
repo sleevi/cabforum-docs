@@ -1142,9 +1142,10 @@ The validity interval of an OCSP response is the difference in time between the 
 
 For the status of Subscriber Certificates:
 
-1.  OCSP responses for certificates must meet the following requirements:
-	a. Minimum validity of eight (8) hours; maximum validity of ten (10) days for leaf certificates and 12 months for subordinate CA certificates; and
-	b. If the validity period of the OCSP response is less than 16 hours, then the next response must be available at ½ the validity period.  If the validity period is greater than 16 hours then the next response must be available no less than 8 hours before the current response expires.
+1. OCSP responses MUST have a validity interval of greater than or equal to eight hours;
+2. OCSP responses MUST have a validity internal of less than or equal to ten days;
+3. For OCSP responses with validity intervals less than sixteen hours, then the CA SHALL update the information provided via an Online Certificate Status Protocol prior to one-half of the validity period before the nextUpdate.
+4. For OCSP responses with validity intervals greater than or equal to sixteen hours, then the CA SHALL update the information provided via an Online Certificate Status Protocol at least eight hours prior to the nextUpdate, and no later than four days after the thisUpdate.
 
 
 For the status of Subordinate CA Certificates:
