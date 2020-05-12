@@ -1700,7 +1700,7 @@ For P-521 keys, the `namedCurve` MUST be secp521r1 (OID: 1.3.132.0.35).
 When encoded, the `AlgorithmIdentifier` for ECDSA keys MUST be byte-for-byte identical with the following hex-encoded bytes:
 * For P-256 keys, `301306072a8648ce3d020106082a8648ce3d030107`.
 * For P-384 keys, `301006072a8648ce3d020106052b81040022`.
-* For P-521 keys, `need to add`.
+* For P-521 keys, `301006072a8648ce3d020106052b81040023`.
 
 #### 7.1.3.2 Signature AlgorithmIdentifier
 All objects signed by a CA Private Key MUST conform to these requirements on the use of the `AlgorithmIdentifier` or `AlgorithmIdentifier`-derived type in the context of signatures.
@@ -2334,4 +2334,3 @@ The Random Value SHALL remain valid for use in a confirming response for no more
 The CA MAY include a wildcard character in the Subject Alternative Name Extension and Subject Common Name Field as the left-most character in the .onion Domain Name provided inclusion of the wildcard character complies with Section 3.2.2.6 of these Requirements.
 
 3. When a Certificate includes an FQDN where "onion" is in the right-most label of the Domain Name, the Domain Name shall not be considered an Internal Name provided that the Certificate was issued in compliance with this Appendix C.
-
