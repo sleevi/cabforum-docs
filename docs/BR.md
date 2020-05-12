@@ -1145,7 +1145,6 @@ For the status of Subscriber Certificates:
 1.  OCSP responses for certificates must meet the following requirements:
 	a. Minimum validity of eight (8) hours; maximum validity of ten (10) days for leaf certificates and 12 months for subordinate CA certificates; and
 	b. If the validity period of the OCSP response is less than 16 hours, then the next response must be available at ½ the validity period.  If the validity period is greater than 16 hours then the next response must be available no less than 8 hours before the current response expires.
-2.  All subordinate CA certificates must include the CRL distribution point extension and an AIA containing an OCSP responder URL.  All end-entity certificates must include the AIA containing an OCSP responder URL and can include the CRL distribution point extension.
 
 
 For the status of Subordinate CA Certificates:
