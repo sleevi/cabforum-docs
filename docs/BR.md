@@ -2032,7 +2032,7 @@ The Audit Report MUST contain at least the following clearly-labelled informatio
 4. audit criteria, with version number(s), that were used to audit each of the certificates (and associated keys);
 5. a list of the CA policy documents, with version numbers, referenced during the audit;
 6. whether the audit assessed a period of time or a point in time;
-7. the start date and end date of the period that was audited, for those that cover a period of time (please note, this is not the period that the auditor was on site);
+7. the start date and end date of the Audit Period, for those that cover a period of time;
 8. the point in time date, for those that are for a point in time;
 9. the date the report was issued, which will necessarily be after the end date or point in time date; and
 10. (for audits conducted in accordance with any of the ETSI standards) a statement to indicate if the audit was a full audit or a surveillance audit, and which portions of the criteria were applied and evaluated, e.g. DVCP, OVCP, NCP, NCP+, LCP, EVCP, EVCP+, QCP-w, Part 1 (General Requirements), and/or Part 2 (Requirements for Trust Service Providers). ETSI audits must include that they referenced the relevant CABForum documents. 
