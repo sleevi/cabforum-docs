@@ -1826,9 +1826,16 @@ If the Server Certificate asserts the policy identifier of 2.23.140.1.2.1, then 
 
 {joint-iso-itu-t(2) international-organizations(23) ca-browser-forum(140) certificate-policies(1) baseline-requirements(2) organization-validated(2)} (2.23.140.1.2.2), if the Server Certificate complies with these Requirements and includes Subject Identity Information that is verified in accordance with Section 3.2.2.1.
 
+If the Server Certificate asserts the policy identifier of 2.23.140.1.2.2, then it MUST also include organizationName, localityName (to the extent such field is required under Section 7.1.4.2.2), stateOrProvinceName (to the extent such field is required under Section 7.1.4.2.2), and countryName in the Subject field. 
+
 {joint-iso-itu-t(2) international-organizations(23) ca-browser-forum(140) certificate-policies(1) baseline-requirements(2) individual-validated(3)} (2.23.140.1.2.3), if the Server Certificate complies with these Requirements and includes Subject Identity Information that is verified in accordance with Section 3.2.3.
 
-If the Server Certificate asserts the policy identifier of 2.23.140.1.2.2, then it MUST also include organizationName, localityName (to the extent such field is required under Section 7.1.4.2.2), stateOrProvinceName (to the extent such field is required under Section 7.1.4.2.2), and countryName in the Subject field.  If the Server Certificate asserts the policy identifier of 2.23.140.1.2.3, then it MUST also include (i) either organizationName or givenName and surname, (ii) localityName (to the extent such field is required under Section 7.1.4.2.2), (iii) stateOrProvinceName (to the extent required under Section 7.1.4.2.2), and (iv) countryName in the Subject field.
+If the Server Certificate asserts the policy identifier of 2.23.140.1.2.3, then it MUST also include (i) either organizationName or givenName and surname, (ii) localityName (to the extent such field is required under Section 7.1.4.2.2), (iii) stateOrProvinceName (to the extent required under Section 7.1.4.2.2), and (iv) countryName in the Subject field.
+
+{joint‐iso‐itu‐t(2) international‐organizations(23) ca‐browser‐forum(140) certificate‐policies(1) ev-guidelines (1) }
+(2.23.140.1.1), if the Server Certificate complies with these Requirements and has been issued and operated in accordance with the CA/Browser Forum Guidelines for the Issuance and Management of Extended Validation Certificates ("EV Guidelines"), in addition to these Requirements.
+
+If the Server Certificate asserts the policy identifier of 2.23.140.1.1, then it MUST include Subject Identity Information as required and verified by the EV Guidelines, and MUST be issued in accordance with those EV Guidelines.
 
 #### 7.1.6.2. Root CA Certificates
 A Root CA Certificate SHOULD NOT contain the certificatePolicies extension.
