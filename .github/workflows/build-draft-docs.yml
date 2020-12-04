@@ -28,8 +28,8 @@ jobs:
       - uses: sleevi/build-guidelines-action@diffs
         id: build_docs
         with:
-          markdown-file: docs/${{ matrix.document }}
-          diff-file: old/docs/${{ matrix.document }}
+          markdown_file: docs/${{ matrix.document }}
+          diff_file: old/docs/${{ matrix.document }}
           pdf: true
           docx: true
           lint: true
@@ -38,8 +38,8 @@ jobs:
         with:
           name: Converted ${{ matrix.document }}
           path: |
-            ${{ steps.build_docs.outputs.pdf-file }}
-            ${{ steps.build_docs.outputs.pdf-redline-file }}
-            ${{ steps.build_docs.outputs.docx-file }}
+            ${{ steps.build_docs.outputs.pdf_file }}
+            ${{ steps.build_docs.outputs.pdf_redline_file }}
+            ${{ steps.build_docs.outputs.docx_file }}
           if-no-files-found: 'error'
           retention-days: 21
