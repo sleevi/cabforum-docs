@@ -1304,8 +1304,8 @@ A certificate serial number within an OCSP request is one of the following three
 
 1. "assigned" if a Certificate with that serial number has been issued by the Issuing CA, using any current or previous key associated with that CA subject; or
 2. "reserved" if a Precertificate [RFC6962] with that serial number has been issued by
-  a. the Issuing CA; or
-  b. a Precertificate Signing Certificate [RFC6962] associated with the Issuing CA; or
+   a. the Issuing CA; or
+   b. a Precertificate Signing Certificate [RFC6962] associated with the Issuing CA; or
 3. "unused" if neither of the previous conditions are met.
 
 ### 4.9.11 Other forms of revocation advertisements available
@@ -2101,8 +2101,8 @@ By issuing a Subordinate CA Certificate, the CA represents that it followed the 
 
 ##### 7.1.4.3.1 Subject Distinguished Name Fields
 
-a. __Certificate Field:__ `subject:commonName` (OID 2.5.4.3)
-   __Required/Optional:__ Required
+a. __Certificate Field:__ `subject:commonName` (OID 2.5.4.3)  
+   __Required/Optional:__ Required  
    __Contents:__ This field MUST be present and the contents SHOULD be an identifier for the certificate such that the certificate's Name is unique across all certificates issued by the issuing certificate.
 
 b. __Certificate Field:__ `subject:organizationName` (OID 2.5.4.10)  
@@ -2582,6 +2582,7 @@ This appendix defines permissible verification procedures for including one or m
       ```
 
       The Random Value SHALL remain valid for use in a confirming response for no more than 30 days from its creation. The CPS MAY specify a shorter validity period for Random Values.
+
       The CA MAY include a wildcard character in the Subject Alternative Name Extension and Subject Common Name Field as the left-most character in the .onion Domain Name provided inclusion of the wildcard character complies with [Section 3.2.2.6](#3226-wildcard-domain-validation) of these Requirements.
 
 3. When a Certificate includes an FQDN where "onion" is in the right-most label of the Domain Name, the Domain Name shall not be considered an Internal Name provided that the Certificate was issued in compliance with this Appendix B.
