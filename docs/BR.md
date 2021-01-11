@@ -2239,7 +2239,6 @@ The `singleExtensions` of an OCSP response MUST NOT contain the `reasonCode` (OI
 
 # 8. COMPLIANCE AUDIT AND OTHER ASSESSMENTS
 
-
 The CA SHALL at all times:
 
 1. Issue Certificates and operate its PKI in accordance with all law applicable to its business and the Certificates it issues in every jurisdiction in which it operates;
