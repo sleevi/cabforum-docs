@@ -39,6 +39,14 @@ c. the relevant practices implemented by Delegated Third Parties.
 
 ## Definitions
 
+**Air-Gapped CA System**: A system that is
+
+  a. kept offline or otherwise air-gapped,
+  b. physically and logically separated from all other CA systems, and
+  c. is used by a CA or Delegated Third Party to store and manage CA private keys and to sign CA certificates, CRLs, or OCSP responses.
+
+  "__Kept offline or otherwise air-gapped__" means that the CA hardware is powered off, and if powered on, is not connected to any other system at any time. Export of data (e.g. CA public keys, signed CA certificates, CRLs, or OCSP responses) from an Air-Gapped CA System would only occur briefly and temporarily with the use of a non-persistent unidirectional mechanism, such as an external drive or unidirectional diode or gateway.
+
 **Certificate Management System**: A system used by a CA or Delegated Third Party to process, approve issuance of, or store certificates or certificate status information, including the database, database server, and storage.
 
 **Certificate Systems**: The system used by a CA or Delegated Third Party in providing identity verification, registration and enrollment, certificate approval, issuance, validity status, support, and other PKI-related services.
@@ -75,7 +83,7 @@ c. the relevant practices implemented by Delegated Third Parties.
 
 **Secure Zone**: An area (physical or logical) protected by physical and logical controls that appropriately protect the confidentiality, integrity, and availability of Certificate Systems.
 
-**Security Support System**: A system used to provide security support functions, which MAY include authentication, network boundary control, audit logging, audit log reduction and analysis, vulnerability scanning, and intrusion detection (Host-based intrusion detection, Network-based intrusion detection).
+**Security Support System**: A system used to provide physical and logical security support functions, which MAY include authentication, network boundary control, audit logging, audit log reduction and analysis, vulnerability scanning, and intrusion detection (physical intrusion detection, Host-based intrusion detection, Network-based intrusion detection).
 
 **System**: One or more pieces of equipment or software that stores, transforms, or communicates data.
 
@@ -93,7 +101,7 @@ a. Segment Certificate Systems into networks based on their functional or logica
 
 b. Apply equivalent security controls to all systems co-located in the same network with a Certificate System;
 
-c. Maintain Root CA Systems in a High Security Zone and in an offline state or air-gapped from all other networks;
+c. Maintain Root CA Systems in a High Security Zone and as Air-Gapped CA Systems, in accordance with [Section 5](#5-general-protections-for-air-gapped-ca-systems);
 
 d. Maintain and protect Issuing Systems, Certificate Management Systems, and Security Support Systems in at least a Secure Zone;
 
@@ -214,3 +222,38 @@ f. Do one of the following within ninety-six (96) hours of discovery of a Critic
       ii. the identification is a false positive,
       iii. the exploit of the vulnerability is prevented by compensating controls or an absence of threats; or
       iv. other similar reasons.
+
+# 5. General Protections for Air-Gapped CA Systems
+
+This Section 5 separates requirements for Air-Gapped CA Systems into two categories -- logical security and physical security.
+
+## 5.1. Logical Security of Air-Gapped CA Systems
+
+Certification Authorities and Delegated Third Parties SHALL implement the following controls to ensure the logical security of Air-Gapped CA Systems:
+
+1. Review configurations of Air-Gapped CA Systems at least on an annual basis;
+2. Follow a documented procedure for appointing individuals to those Trusted Roles that are authorized to operate Air-Gapped CA Systems;
+3. Grant logical access to Air-Gapped CA Systems only to persons acting in Trusted Roles and implement controls so that all logical access to Air-Gapped CA Systems can be traced back to an accountable individual;
+4. Document the responsibilities assigned to Trusted Roles based on the security principle of multi-person control and the security-related concerns of the functions to be performed;
+5. Ensure that an individual in a Trusted Role acts only within the scope of such role when performing administrative tasks assigned to that role;
+6. Require employees and contractors to observe the principle of "least privilege" when accessing, or when configuring access privileges on, Air-Gapped CA Systems;
+7. Require that all access to systems and offline key material can be traced back to an individual in a Trusted Role (through a combination of recordkeeping, use of logical and physical credentials, authentication factors, video recording, etc.);
+8. If an authentication control used by a Trusted Role is a username and password, then, where technically feasible require that passwords have at least twelve (12) characters;
+9. Review logical access control lists at least annually and deactivate any accounts that are no longer necessary for operations;
+10. Enforce Multi-Factor Authentication OR multi-party authentication for administrator access to Air-Gapped CA Systems;
+11. Identify those Air-Gapped CA Systems capable of monitoring and logging system activity and enable those systems to continuously monitor and log system activity. Back up logs to an external system each time the system is used or on a quarterly basis, whichever is less frequent;
+12. On a quarterly basis or each time the Air-Gapped CA System is used, whichever is less frequent, check the integrity of the logical access logging processes and ensure that logging and log-integrity functions are effective;
+13. On a quarterly basis or each time the Air-Gapped CA System is used, whichever is less frequent, monitor the archival and retention of logical access logs to ensure that logs are retained for the appropriate amount of time in accordance with the disclosed business practices and applicable legislation.
+
+## 5.2. Physical Security of Air-Gapped CA Systems
+
+Certification Authorities and Delegated Third Parties SHALL implement the following controls to ensure the physical security of Air-Gapped CA Systems:
+
+1. Grant physical access to Air-Gapped CA Systems only to persons acting in Trusted Roles and implement controls so that all physical access to Air-Gapped CA Systems can be traced back to an accountable individual;
+2. Ensure that only personnel assigned to Trusted Roles have physical access to Air-Gapped CA Systems and multi-person access controls are enforced at all times;
+3. Implement a process that removes physical access of an individual to all Air-Gapped CA Systems within twenty-four (24) hours upon termination of the individual’s employment or contracting relationship with the CA or Delegated Third Party;
+4. Implement video monitoring, intrusion detection, and intrusion prevention controls to protect Air-Gapped CA Systems against unauthorized physical access attempts;
+5. Implement a Security Support System that monitors, detects, and alerts personnel to any physical access to Air-Gapped CA Systems;
+6. Implement a process that prevents physical access of an individual to an Air-Gapped CA within twenty-four (24) hours of removal from the relevant authorized Trusted Role, and review lists of holders of physical keys and combinations to doors and safes as well as logical accounts tied to physical access controls at least every three (3) months, and;
+7. On a quarterly basis or each time the Air-Gapped CA System is used, whichever is less frequent, monitor the archival and retention of the physical access logs to ensure that logs are retained for the appropriate amount of time in accordance with the disclosed business practices and applicable legislation.
+8. On a quarterly basis or each time the Air-Gapped CA System is used, whichever is less frequent, check the integrity of the physical access logging processes and ensure that logging and log-integrity functions are effective.
