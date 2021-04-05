@@ -867,8 +867,6 @@ Completed validations of Applicant authority may be valid for the issuance of mu
 
 After July 31, 2019, CAs SHALL maintain a record of which IP validation method, including the relevant BR version number, was used to validate every IP Address.
 
-**Note**: IP Addresses verified in accordance with this [Section 3.2.2.5](#3225-authentication-for-an-ip-address) may be listed in Subscriber Certificates as defined in [Section 7.1.4.2](#7142-subject-information---subscriber-certificates) or in Subordinate CA Certificates via iPAddress in permittedSubtrees within the Name Constraints extension. CAs are not required to verify IP Addresses listed in Subordinate CA Certificates via iPAddress in excludedSubtrees in the Name Constraints extension prior to inclusion in the Subordinate CA Certificate.
-
 ##### 3.2.2.5.1 Agreed-Upon Change to Website
 
 Confirming the Applicant's control over the requested IP Address by confirming the presence of a Request Token or Random Value contained in the content of a file or webpage in the form of a meta tag under the "/.well-known/pki-validation" directory, or another path registered with IANA for the purpose of validating control of IP Addresses, on the IP Address that is accessible by the CA via HTTP/HTTPS over an Authorized Port. The Request Token or Random Value MUST NOT appear in the request.
@@ -1863,7 +1861,7 @@ Table: Extensions when the Subordinate CA is operated by the Issuing CA or an Af
 | `subjectKeyIdentifier`            | MUST            | N                     | See [Section 7.1.2.9.4](#71294-subject-key-identifier) |
 | `extKeyUsage`                     | SHOULD[^eku_ca] | N                     | See [Section 7.1.2.2.3](#71223-extended-key-usage---unrestricted-affiliated-cross-certified-ca) |
 | `authorityInformationAccess`      | SHOULD          | N                     | See [Section 7.1.2.8.2](#71282-authority-information-access) |
-| `nameConstraints`                 | MAY             | \*[^name_constraints] | See [Section 7.1.2.8.9](#71289-name-constraings) |
+| `nameConstraints`                 | MAY             | \*[^name_constraints] | See [Section 7.1.2.8.9](#71289-name-constraints) |
 | Signed Certificate Timestamp List | MAY             | N                     | See [Section 7.1.2.9.3](#71293-signed-certificate-timestamp-list) |
 | Any other extension               | SHOULD NOT      | -                     | __**TBD**__ |
 
@@ -1879,13 +1877,13 @@ Table: Extensions when the Subordinate CA is operated by an entity that is not t
 | `subjectKeyIdentifier`            | MUST          | N                     | See [Section 7.1.2.9.4](#71294-subject-key-identifier) |
 | `extKeyUsage`                     | MUST[^eku_ca] | N                     | See [Section 7.1.2.2.4](#71224-extended-key-usage---restricted-cross-certified-ca) |
 | `authorityInformationAccess`      | SHOULD        | N                     | See [Section 7.1.2.8.2](#71282-authority-information-access) |
-| `nameConstraints`                 | MAY           | \*[^name_constraints] | See [Section 7.1.2.8.9](#71289-name-constraings) |
+| `nameConstraints`                 | MAY           | \*[^name_constraints] | See [Section 7.1.2.8.9](#71289-name-constraints) |
 | Signed Certificate Timestamp List | MAY           | N                     | See [Section 7.1.2.9.3](#71293-signed-certificate-timestamp-list) |
 | Any other extension               | SHOULD NOT    | -                     | __**TBD**__ |
 
 [^eku_ca]: While [RFC 5280, Section 4.2.1.12](https://tools.ietf.org/html/rfc5280#section-4.2.1.13) notes that this extension will generally only appear within end-entity certificates, these Requirements make use of this extension to further protect relying parties by limiting the scope of CA Certificates, as implemented by a number of Application Software Suppliers.
 
-[^name_constraints]: See [Section 7.1.2.8.9](#71289-name-constraings) for further requirements, including regarding criticality of this extension.
+[^name_constraints]: See [Section 7.1.2.8.9](#71289-name-constraints) for further requirements, including regarding criticality of this extension.
 
 ##### 7.1.2.2.3 Extended Key Usage - Unrestricted Affiliated Cross-Certified CA
 
@@ -1936,7 +1934,7 @@ This Certificate Profile MAY be used when issuing a CA Certificate that will be 
 | `subjectKeyIdentifier`            | MUST          | N                     | See [Section 7.1.2.9.4](#71294-subject-key-identifier) |
 | `extKeyUsage`                     | MUST[^eku_ca] | N                     | See [Section 7.1.2.8.5](#71286-extended-key-usage---non-tls-ca) (Non-TLS CA) |
 | `authorityInformationAccess`      | SHOULD        | N                     | See [Section 7.1.2.8.2](#71282-authority-information-access) |
-| `nameConstraints`                 | MAY           | \*[^name_constraints] | See [Section 7.1.2.8.9](#71289-name-constraings) |
+| `nameConstraints`                 | MAY           | \*[^name_constraints] | See [Section 7.1.2.8.9](#71289-name-constraints) |
 | Signed Certificate Timestamp List | MAY           | N                     | See [Section 7.1.2.9.3](#71293-signed-certificate-timestamp-list) |
 | Any other extension               | SHOULD NOT    | -                     | __**TBD**__ |
 
@@ -1989,7 +1987,7 @@ Table: `nameConstraints` requirements
 | \ \ \ \ \ \ \ \ `base`    | See following table. |
 | \ \ \ \ \ \ \ \ `minimum` | MUST NOT be present. |
 | \ \ \ \ \ \ \ \ `maximum` | MUST NOT be present. |
-| `excludedSubtrees`        | The `excludedSubtrees` MUST contain at least one `GeneralSubtree` for each of the`dNSName` and `iPAddress` `GeneralName` name types, unless there is an instance present of that name type in the `permittedSubtrees` The `directoryName` name type SHOULD NOT be present. |
+| `excludedSubtrees`        | The `excludedSubtrees` MUST contain at least one `GeneralSubtree` for each of the `dNSName` and `iPAddress` `GeneralName` name types, unless there is an instance present of that name type in the `permittedSubtrees`. The `directoryName` name type SHOULD NOT be present. |
 | \ \ \ \ `GeneralSubtree`  | The requirements for a `GeneralSubtree` that appears within a `permittedSubtrees`. |
 | \ \ \ \ \ \ \ \ `base`    | See following table. |
 | \ \ \ \ \ \ \ \ `minimum` | MUST NOT be present. |
@@ -2001,10 +1999,21 @@ Table: `GeneralName` requirements for the `base` field
 
 | __Name Type__   | __Presence__ |  __Permitted Subtrees__ | __Excluded Subtrees__ | __Entire Namespace Exclusion__ |
 | ---             | -            | ----                    | ----                  | ----                           |
-| `dnsName`       | MUST         | The CA MUST confirm that the Applicant has registered the `dNSName` or has been authorized by the domain registrant to act on the registrant's behalf. See [Section 3.2.2.4](#3224-validation-of-domain-authorization-or-control). | If at least one `dNSName` instance is present in the `permittedSubtrees`, the CA MAY indicate one or more subordinate domains to be excluded. | If no `dNSName` instance is present in the `permittedSubtrees`, then the CA MUST include a zero-length `dNSName` to indicate no domain names are permitted. |
+| `dNSName`       | MUST         | The CA MUST confirm that the Applicant has registered the `dNSName` or has been authorized by the domain registrant to act on the registrant's behalf. See [Section 3.2.2.4](#3224-validation-of-domain-authorization-or-control). | If at least one `dNSName` instance is present in the `permittedSubtrees`, the CA MAY indicate one or more subordinate domains to be excluded. | If no `dNSName` instance is present in the `permittedSubtrees`, then the CA MUST include a zero-length `dNSName` to indicate no domain names are permitted. |
 | `iPAddress`     | MUST        | The CA MUST confirm that the Applicant has been assigned the `iPAddress` range or has been authorized by the assigner to act on the asignee's behalf. See [Section 3.2.2.5](#3225-authentication-for-an-ip-address). | If at least one `iPAddress` instance is present in the `permittedSubtrees`, the CA MAY indicate one or more subdivisions of those ranges to be excluded. | If no IPv4 `iPAddress` is present in the `permittedSubtrees`, the CA MUST include an `iPAddress` of 8 zero octets, indicating the IPv4 range of 0.0.0.0/0 being excluded. If no IPv6 `iPAddress` is present in the `permittedSubtrees`, the CA MUST include an `iPAddress` of 32 zero octets, indicating the IPv6 range of ::0/0 being excluded. |
 | `directoryName` | MUST        | The CA MUST confirm the Applicant's and/or Subsidiary's name attributes such that all certificates issued will comply with the relevant Certificate Profile (see [Section 7.1.2](#712-certificate-content-and-extensions)), including Name Forms (See [Section 7.1.4](#714-name-forms)). | The CA SHOULD NOT include values within `excludedSubtrees`. | The CA MUST include a value within `permittedSubtrees`, and as such, this does not apply. See the Excluded Subtrees requirements for more. |
+| `rfc822Name`    | SHOULD NOT  | The CA MAY constrain to a mailbox, a particular host, or any address within a domain, as specified within [RFC 5280, Section 4.2.1.10](https://tools.ietf.org/html/rfc5280#section-4.2.1.10). For each host, domain, or Domain portion of a Mailbox (as specified within [RFC 5280, Section 4.2.1.6](https://tools.ietf.org/html/rfc5280#section-4.2.1.6)), the CA MUST confirm that the Applicant has registered the domain or has been authorized by the domain registrant to act on the registrant's behalf. See [Section 3.2.2.4](#3224-validation-of-domain-authorization-or-control). | If at least one `rfc822Name` instance is present in the `permittedSubtrees`, the CA MAY indicate one or more mailboxes, hosts, or domains to be excluded. | If no `rfc822Name` instance is present in the `permittedSubtrees`, then the CA MAY include a zero-length `rfc822Name` to indicate no mailboxes are permitted. |
+| `otherName`     | SHOULD NOT  | See following table.     | See following table.  | See following table.           |
 | Any other value | SHOULD NOT  | -                        | -                     | -                              |
+
+When an `otherName` is present within a `GeneralName` present in the `base` of a `nameConstraints` `permittedSubtrees` or `excludedSubtrees`, it MUST meet the following requirements:
+
+Table: `otherName` requirements within a `GeneralName`
+
+| __`type-id`__                                                                      | __Presence__ |  __Permitted Subtrees__ | __Excluded Subtrees__ | __Entire Namespace Exclusion__ |
+| ---                                                                                | -            | ----                    | ----                  | ----                           |
+| `id-on-dnsSRV` (1.3.6.1.5.5.7.8.7) [RFC 4985](https://tools.ietf.org/html/rfc4985) | SHOULD NOT   | The CA MUST confirm that the Applicant has registered the `Name` portion or has been authorized by the domain registrant to act on the registrant's behalf. See [Section 3.2.2.4](#3224-validation-of-domain-authorization-or-control). | If at least one `id-on-dnsSRV` `otherName` name is present in the `permittedSubtrees`, the CA MAY indicate one or more SRVNames, service names, or DNS names to exclude. | If no `id-on-dnsSRV` `otherName` is present in the `permittedSubtrees`, then the CA MAY include a zero-length `SRVName` to indicate no SRVNames are permitted. |
+| Any other value                                                                    | SHOULD NOT   | -                       | -                     | -                              |
 
 #### 7.1.2.5 TLS Subordinate CA Certificate Profile
 
@@ -2035,7 +2044,7 @@ Table: `GeneralName` requirements for the `base` field
 | `keyUsage`                        | MUST          | Y                     | See [Section 7.1.2.8.8](#71288-key-usage) |
 | `subjectKeyIdentifier`            | MUST          | N                     | See [Section 7.1.2.9.4](#71294-subject-key-identifier) |
 | `extKeyUsage`                     | MUST[^eku_ca] | N                     | See [Section 7.1.2.8.7](#71287-extended-key-usage---tls-ca) (TLS CA) |
-| `nameConstraints`                 | MUST          | \*[^name_constraints] | See [Section 7.1.2.8.2](#71287-name-constraints) |
+| `nameConstraints`                 | MUST          | \*[^name_constraints] | See [Section 7.1.2.8.9](#71289-name-constraints) |
 | `authorityInformationAccess`      | SHOULD        | N                     | See [Section 7.1.2.8.2](#71282-authority-information-access) |
 | Signed Certificate Timestamp List | MAY           | N                     | See [Section 7.1.2.9.3](#71293-signed-certificate-timestamp-list) |
 | Any other extension               | SHOULD NOT    | -                     | __**TBD**__ |
@@ -2177,8 +2186,8 @@ For a Subscriber Certificate to be Extended Validation, it MUST comply with the 
 | `extKeyUsage`                     | MUST         | N            | See [Section 7.1.2.6.10](#712610-extended-key-usage) |
 | `subjectAltName`                  | MUST         | -            | See [Section 7.1.2.6.12](#712612-subject-alternative-name) |
 | `nameConstraints`                 | MUST NOT     | -            | - |
+| `keyUsage`                        | SHOULD       | Y            | See [Section 7.1.2.6.11](#712611-key-usage) |
 | `crlDistributionPoints`           | MAY          | N            | See [Section 7.1.2.9.2](#71292-crl-distribution-points) |
-| `keyUsage`                        | MAY          | Y            | See [Section 7.1.2.6.11](#712611-key-usage) |
 | CA/Browser Forum Onion Extension  | MAY          | N            | __**TODO**__ |
 | Signed Certificate Timestamp List | MAY          | N            | See [Section 7.1.2.9.3](#71293-signed-certificate-timestamp-list) |
 | `subjectKeyIdentifier`            | SHOULD NOT   | N            | See [Section 7.1.2.9.4](#71294-subject-key-identifier) |
@@ -2190,8 +2199,8 @@ The `AuthorityInformationAccesssSyntax` MUST contain one or more `AccessDescript
 
 | __Access Method__ | __OID__            | __Presence__ | __Access Location__         | __Description__ |
 | --                | --                 | -            | ----                        | ---             |
-| `id-ad-ocsp`      | 1.3.6.1.5.5.7.48.1 | MUST         | `uniformResourceIdentifier` | An HTTP URL of the Issuing CA's OCSP responder. |
-| `id-ad-caIssuers` | 1.3.6.1.5.5.7.48.2 | SHOULD       | `uniformResourceIdentifier` | An HTTP URL of the Issuing CA's certificate. |
+| `id-ad-ocsp`      | 1.3.6.1.5.5.7.48.1 | MUST         | `uniformResourceIdentifier` | A HTTP URL of the Issuing CA's OCSP responder. |
+| `id-ad-caIssuers` | 1.3.6.1.5.5.7.48.2 | SHOULD       | `uniformResourceIdentifier` | A HTTP URL of the Issuing CA's certificate. |
 | Any other value   | -                  | MUST NOT     | -                           | -               |
 
 ##### 7.1.2.6.8 Basic Constraints
@@ -2200,8 +2209,6 @@ The `AuthorityInformationAccesssSyntax` MUST contain one or more `AccessDescript
 | ---                 | ------- |
 | `cA`                | MUST be FALSE |
 | `pathLenConstraint` | MUST NOT be present |
-
-**Note**: CAs MUST observe DER encoding rules, such as not explicitly encoding DEFAULT values within OPTIONAL fields.
 
 ##### 7.1.2.6.9 Certificate Policies
 
@@ -2220,7 +2227,7 @@ If the `policyQualifiers` is permitted and present within a `PolicyInformation` 
 
 | __Qualifier ID__                     | __Presence__ | __Field Type__ |  __Contents__ |
 | ---                                  | -            | -              | -----         |
-| `id-qt-cps` (OID: 1.3.6.1.5.5.7.2.1) | MAY          | `IA5String`    | The HTTP URL for the Issuing CA's Certificate Policies, Certification Practice Statement, Relying Party Agreement, or other pointer to online policy information provided by the Issuing CA. |
+| `id-qt-cps` (OID: 1.3.6.1.5.5.7.2.1) | MAY          | `IA5String`    | The HTTP or HTTPS URL for the Issuing CA's Certificate Policies, Certification Practice Statement, Relying Party Agreement, or other pointer to online policy information provided by the Issuing CA. |
 | Any other qualifier                  | MUST NOT     | -              | -             |
 
 ##### 7.1.2.6.10 Extended Key Usage
@@ -2292,7 +2299,7 @@ Table: `GeneralName` within a `subjectAltName` extension
 
 #### 7.1.2.7 OCSP Responder Certificate Profile
 
-If the Issuing CA does not directly sign OCSP responses, it MAY make use of an OCSP Authorized Responder. The Issuing CA of the Responder MUST be the same as the Issuing CA for the Certificates it provides responses for.
+If the Issuing CA does not directly sign OCSP responses, it MAY make use of an OCSP Authorized Responder, as definied by [RFC 6960](https://tools.ietf.org/html/rfc6960#section-4.2.2.2). The Issuing CA of the Responder MUST be the same as the Issuing CA for the Certificates it provides responses for.
 
 | __Field__                      | __Description__ |
 | ---                            | ------          |
@@ -2319,14 +2326,26 @@ If the Issuing CA does not directly sign OCSP responses, it MAY make use of an O
 | `extKeyUsage`                     | MUST         | -            | See [Section 7.1.2.7.4](#71274-extended-key-usage) |
 | `id-pkix-ocsp-nocheck`            | MUST         | N            | See [Section 7.1.2.7.5](#71275-id-pkix-ocsp-nocheck) |
 | `keyUsage`                        | MUST         | Y            | See [Section 7.1.2.7.6](#71276-key-usage) |
-| `certificatePolicies`             | MUST NOT     | N            | - |
 | `nameConstraints`                 | MUST NOT     | -            | - |
 | `subjectAltName`                  | MUST NOT     | -            | - |
 | `subjectKeyIdentifier`            | SHOULD       | N            | See [Section 7.1.2.9.4](#71294-subject-key-identifier) |
 | `authorityInformationAccess`      | SHOULD NOT   | N            | See [Section 7.1.2.7.2](#71272-authority-information-access) |
 | `crlDistributionPoints`           | SHOULD NOT   | N            | See [Section 7.1.2.9.2](#71292-crl-distribution-points) |
 | Signed Certificate Timestamp List | MAY          | N            | See [Section 7.1.2.9.3](#71293-signed-certificate-timestamp-list) |
+| `certificatePolicies`             | -            | -            | See following tables |
 | Any other extension               | SHOULD NOT   | -            | __**TBD**__ |
+
+
+Table: Additional extension profile for OCSP Responder certificates issued prior to October 1, 2021
+
+| __Extension__                     | __Presence__ | __Critical__ | __Description__ |
+| `certificatePolicies`             | SHOULD NOT   | N            | See [Section 7.1.2.7.7](#71277-certificate-policies) |
+
+
+Table: Effective October 1, 2021, additional extension profile for OCSP Responder certificates
+
+| __Extension__                     | __Presence__ | __Critical__ | __Description__ |
+| `certificatePolicies`             | MUST NOT     | -            | - |
 
 ##### 7.1.2.7.2 Authority Information Access
 
@@ -2336,8 +2355,8 @@ If present, the `AuthorityInformationAccesssSyntax` MUST contain one or more `Ac
 
 | __Access Method__ | __OID__            | __Presence__ | __Access Location__         | __Description__ |
 | --                | --                 | -            | ----                        | ---             |
-| `id-ad-caIssuers` | 1.3.6.1.5.5.7.48.2 | SHOULD NOT   | `uniformResourceIdentifier` | An HTTP URL of the Issuing CA's certificate. |
-| `id-ad-ocsp`      | 1.3.6.1.5.5.7.48.1 | MUST NOT     | `uniformResourceIdentifier` | An HTTP URL of the Issuing CA's OCSP responder. |
+| `id-ad-caIssuers` | 1.3.6.1.5.5.7.48.2 | SHOULD NOT   | `uniformResourceIdentifier` | A HTTP URL of the Issuing CA's certificate. |
+| `id-ad-ocsp`      | 1.3.6.1.5.5.7.48.1 | MUST NOT     | `uniformResourceIdentifier` | A HTTP URL of the Issuing CA's OCSP responder. |
 | Any other value   | -                  | MUST NOT     | -                           | -               |
 
 ##### 7.1.2.7.3 Basic Constraints
@@ -2382,6 +2401,27 @@ This extension MUST be encoded as a single ASN.1 NULL, as specified in [RFC 6960
 | `encipherOnly`     | N             | --               |
 | `decipherOnly`     | N             | --               |
 
+##### 7.1.2.7.7 Certificate Policies
+
+**Note**: See [Section 7.1.2.7.1](#71271-ocsp-responder-extensions) for applicable effective dates for when this extension may be included.
+
+If present, the Certificate Policies extension MUST be formatted as follows:
+
+| __Field__                  | __Presence__ | __Description__ |
+| ---                        | -            | ------          |
+| `certificatePolicies`      |              |                 |
+| \ \ **1**                  | MAY          | The CA MAY include one or more `PolicyInformation` values that meet the following profile: |
+| \ \ \ \ `policyIdentifier` | MUST         | An identifier documented by the CA in its Certificate Policy and/or Certification Practice Statement. |
+| \ \ \ \ `policyQualifiers` | SHOULD NOT   | See below for restrictions on `policyQualifiers` |
+| \ \ **4**                  | MUST NOT     | The CA MUST NOT include any additional `PolicyInformation` values that do not meet the above profile. |
+
+If the `policyQualifiers` is permitted and present within a `PolicyInformation` field, it MUST be formatted as follows:
+
+| __Qualifier ID__                     | __Presence__ | __Field Type__ |  __Contents__ |
+| ---                                  | -            | -              | -----         |
+| `id-qt-cps` (OID: 1.3.6.1.5.5.7.2.1) | MAY          | `IA5String`    | The HTTP or HTTPS URL for the Issuing CA's Certificate Policies, Certification Practice Statement, Relying Party Agreement, or other pointer to online policy information provided by the Issuing CA. |
+| Any other qualifier                  | MUST NOT     | -              | -             |
+
 #### 7.1.2.8 Common CA Fields
 
 This section contains several fields that are common among multiple CA Certificate profiles. However, these fields may not be common among all CA Certificate profiles. Before issuing a certificate, the CA MUST ensure the certificate contents, including the contents of each field, complies in whole with all of the requirements of at least one Certificate Profile documented in [Section 7.1.2](#712-certificate-content-and-extensions).
@@ -2410,8 +2450,8 @@ If present, the `AuthorityInformationAccesssSyntax` MUST contain one or more `Ac
 
 | __Access Method__ | __OID__            | __Presence__ | __Access Location__         | __Description__ |
 | --                | --                 | -            | ----                        | ---             |
-| `id-ad-caIssuers` | 1.3.6.1.5.5.7.48.2 | SHOULD       | `uniformResourceIdentifier` | An HTTP URL of the Issuing CA's certificate. |
-| `id-ad-ocsp`      | 1.3.6.1.5.5.7.48.1 | MAY          | `uniformResourceIdentifier` | An HTTP URL of the Issuing CA's OCSP responder. |
+| `id-ad-caIssuers` | 1.3.6.1.5.5.7.48.2 | SHOULD       | `uniformResourceIdentifier` | A HTTP URL of the Issuing CA's certificate. |
+| `id-ad-ocsp`      | 1.3.6.1.5.5.7.48.1 | MAY          | `uniformResourceIdentifier` | A HTTP URL of the Issuing CA's OCSP responder. |
 | Any other value   | -                  | MUST NOT     | -                           | -               |
 
 ##### 7.1.2.8.3 Basic Constraints
@@ -2477,7 +2517,7 @@ If the `policyQualifiers` is permitted and present within a `PolicyInformation` 
 
 | __Qualifier ID__                     | __Presence__ | __Field Type__ |  __Contents__ |
 | ---                                  | -            | -              | -----         |
-| `id-qt-cps` (OID: 1.3.6.1.5.5.7.2.1) | MAY          | `IA5String`    | The HTTP URL for the Issuing CA's Certificate Policies, Certification Practice Statement, Relying Party Agreement, or other pointer to online policy information provided by the Issuing CA. |
+| `id-qt-cps` (OID: 1.3.6.1.5.5.7.2.1) | MAY          | `IA5String`    | The HTTP or HTTPS URL for the Issuing CA's Certificate Policies, Certification Practice Statement, Relying Party Agreement, or other pointer to online policy information provided by the Issuing CA. |
 | Any other qualifier                  | MUST NOT     | -              | -             |
 
 ##### 7.1.2.8.6 Extended Key Usage - Non-TLS CA
@@ -2550,7 +2590,7 @@ Table: `GeneralName` requirements for the `base` field
 
 | __Name Type__   | __Presence__ |  __Permitted Subtrees__ | __Excluded Subtrees__ |
 | --              | -            | ----                    | ----                  |
-| `dnsName`       | MAY          | The CA MUST confirm that the Applicant has registered the `dNSName` or has been authorized by the domain registrant to act on the registrant's behalf. See [Section 3.2.2.4](#3224-validation-of-domain-authorization-or-control). | If at least one `dNSName` instance is present in the `permittedSubtrees`, the CA MAY indicate one or more subordinate domains to be excluded. |
+| `dNSName`       | MAY          | The CA MUST confirm that the Applicant has registered the `dNSName` or has been authorized by the domain registrant to act on the registrant's behalf. See [Section 3.2.2.4](#3224-validation-of-domain-authorization-or-control). | If at least one `dNSName` instance is present in the `permittedSubtrees`, the CA MAY indicate one or more subordinate domains to be excluded. |
 | `iPAddress`     | MAY          | The CA MUST confirm that the Applicant has been assigned the `iPAddress` range or has been authorized by the assigner to act on the asignee's behalf. See [Section 3.2.2.5](#3225-authentication-for-an-ip-address). | If at least one `iPAddress` instance is present in the `permittedSubtrees`, the CA MAY indicate one or more subdivisions of those ranges to be excluded. |
 | `directoryName` | MMAY         | The CA MUST confirm the Applicant's and/or Subsidiary's name attributes such that all certificates issued will comply with the relevant Certificate Profile (see [Section 7.1.2](#712-certificate-content-and-extensions)), including Name Forms (See [Section 7.1.4](#714-name-forms)). | The CA SHOULD NOT include values within `excludedSubtrees`. |
 | Any other value | SHOULD NOT   | -                        | -                     |
@@ -2618,7 +2658,7 @@ b. semantics that, if included, will mislead a Relying Party about the certifica
 
 #### 7.1.2.5 Application of RFC 5280
 
-Except where explicitly noted, all certificates MUST conform to the certificate profile of RFC 5280. The following requirements are noted in addition to any normative requirements placed within RFC 5280.
+Except where explicitly noted, all certificates MUST conform to the certificate profile of RFC 5280. The following requirements are noted in addition to any normative requirements placed within RFC 5280. In particular, CAs SHOULD examine [RFC 5280, Appendix B](https://tools.ietf.org/html/rfc5280#appendix-B) for further discussion of normative requirements imposed by RFC 5280 and its normative dependencies.
 
 For purposes of clarification, a Precertificate, as described in [RFC 6962 - Certificate Transparency](https://tools.ietf.org/html/rfc6962), shall not be considered to be a "certificate" subject to the requirements of [RFC 5280 - Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile](https://tools.ietf.org/html/rfc5280) under these Baseline Requirements.
 
@@ -2780,17 +2820,19 @@ Table: Attribute Encoding and Order Requirements
 | __Attribute__            | __OID__    | __Specification__                               | __Encoding Requirements__ | __Max Length[^maxlength]__ |
 | ----                     | --         | ---                                             | ----                  | - |
 | `countryName`            | `2.5.4.6`  | [RFC 5280](https://tools.ietf.org/html/rfc5280) |                       | 2 |
-| `stateOrProvinceName`    | `2.5.4.8`  | [RFC 5280](https://tools.ietf.org/html/rfc5280) | MUST use `UTF8String` | 128 |
-| `localityName`           | `2.5.4.7`  | [RFC 5280](https://tools.ietf.org/html/rfc5280) | MUST use `UTF8String` | 128 |
-| `streetAddress`          | `2.5.4.9`  | X.520                                           | MUST use `UTF8String` | 128 |
-| `postalCode`             | `2.5.4.17` | X.520                                           | MUST use `UTF8String` | 40 |
-| `organizationName`       | `2.5.4.10` | [RFC 5280](https://tools.ietf.org/html/rfc5280) | MUST use `UTF8String` | 64 |
-| `surname`                | `2.5.4.4`  | X.520                                           | MUST use `UTF8String` | -  |
-| `givenName`              | `2.5.4.42` | X.520                                           | MUST use `UTF8String` | -  |
-| `organizationalUnitName` | `2.5.4.11` | [RFC 5280](https://tools.ietf.org/html/rfc5280) | MUST use `UTF8String` | 32 |
-| `commonName`             | `2.5.4.3`  | [RFC 5280](https://tools.ietf.org/html/rfc5280) | MUST use `UTF8String` | 64 |
+| `stateOrProvinceName`    | `2.5.4.8`  | [RFC 5280](https://tools.ietf.org/html/rfc5280) | MUST use `UTF8String` or `PrintableString` | 128 |
+| `localityName`           | `2.5.4.7`  | [RFC 5280](https://tools.ietf.org/html/rfc5280) | MUST use `UTF8String` or `PrintableString` | 128 |
+| `streetAddress`          | `2.5.4.9`  | X.520                                           | MUST use `UTF8String` or `PrintableString` | 128 |
+| `postalCode`             | `2.5.4.17` | X.520                                           | MUST use `UTF8String` or `PrintableString` | 40 |
+| `organizationName`       | `2.5.4.10` | [RFC 5280](https://tools.ietf.org/html/rfc5280) | MUST use `UTF8String` or `PrintableString` | 64 |
+| `surname`                | `2.5.4.4`  | [RFC 5280](https://tools.ietf.org/html/rfc5280) | MUST use `UTF8String` or `PrintableString` | 64[^surname_givenname] |
+| `givenName`              | `2.5.4.42` | [RFC 5280](https://tools.ietf.org/html/rfc5280) | MUST use `UTF8String` or `PrintableString` | 64[^surname_givenname] |
+| `organizationalUnitName` | `2.5.4.11` | [RFC 5280](https://tools.ietf.org/html/rfc5280) | MUST use `UTF8String` or `PrintableString` | 32 |
+| `commonName`             | `2.5.4.3`  | [RFC 5280](https://tools.ietf.org/html/rfc5280) | MUST use `UTF8String` or `PrintableString` | 64 |
 
-[^maxlength]: Note: ASN.1 length limits for DirectoryString are expressed as character limits, not byte limits.
+[^maxlength]: **Note**: ASN.1 length limits for DirectoryString are expressed as character limits, not byte limits.
+
+[^surname_givenname] **Note**: Although RFC 5280 specifies the upper bound as 32,768 characters, this was a transcription error from X.520 (08/2005). The effective (interoperable) upper bound is 64 characters.
 
 #### 7.1.4.3 Other Subject Attributes
 
