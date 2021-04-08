@@ -2181,12 +2181,12 @@ For a Subscriber Certificate to be Extended Validation, it MUST comply with the 
 | ----                              | -            | -            | ----- |
 | `authorityInformationAccess`      | MUST         | N            | See [Section 7.1.2.6.7](#71267-authority-information-access) |
 | `authorityKeyIdentifier`          | MUST         | N            | See [Section 7.1.2.9.1](#71291-authority-key-identifier) |
-| `basicConstraints`                | MUST         | Y            | See [Section 7.1.2.6.8](#71268-basic-constraints) |
 | `certificatePolicies`             | MUST         | N            | See [Section 7.1.2.6.9](#71269-certificate-policies) |
 | `extKeyUsage`                     | MUST         | N            | See [Section 7.1.2.6.10](#712610-extended-key-usage) |
 | `subjectAltName`                  | MUST         | -            | See [Section 7.1.2.6.12](#712612-subject-alternative-name) |
 | `nameConstraints`                 | MUST NOT     | -            | - |
 | `keyUsage`                        | SHOULD       | Y            | See [Section 7.1.2.6.11](#712611-key-usage) |
+| `basicConstraints`                | MAY          | Y            | See [Section 7.1.2.6.8](#71268-basic-constraints) |
 | `crlDistributionPoints`           | MAY          | N            | See [Section 7.1.2.9.2](#71292-crl-distribution-points) |
 | CA/Browser Forum Onion Extension  | MAY          | N            | __**TODO**__ |
 | Signed Certificate Timestamp List | MAY          | N            | See [Section 7.1.2.9.3](#71293-signed-certificate-timestamp-list) |
@@ -2218,7 +2218,7 @@ The `AuthorityInformationAccesssSyntax` MUST contain one or more `AccessDescript
 | \ \ **1**                  | MUST         | The first `PolicyInformation` present in the `certificatePolicies`. |
 | \ \ \ \ `policyIdentifier` |              | The Reserved Certificate Policy Identifier (see [Section 7.1.6.1](#7161-reserved-certificate-policy-identifiers)) associated with the given Subscriber Certificate type (see [Section 7.1.2.6.1](#71261-subscriber-certificate-types). |
 | \ \ \ \ `policyQualifiers` | SHOULD NOT   | See below for restrictions on `policyQualifiers` |
-| \ \ **2**                  | MAY          | The Issuing CA MAY include additional `PolicyInformation` values that meet the following profile: |
+| \ \ **2+**                 | MAY          | The Issuing CA MAY include additional `PolicyInformation` values that meet the following profile: |
 | \ \ \ \ `policyIdentifier` | MUST         | An identifier documented by the Issuing CA in its Certificate Policy and/or Certification Practice Statement. |
 | \ \ \ \ `policyQualifiers` | SHOULD NOT   | See below for restrictions on `policyQualifiers` |
 | \ \ **3**                  | MUST NOT     | The Issuing CA MUST NOT include any additional `PolicyInformation` values that do not meet the above profile. |
@@ -2253,15 +2253,15 @@ Table: Key Usage for RSA Public Keys
 | ----               | -             | -                |
 | `digitalSignature` | Y             | SHOULD           |
 | `nonRepudiation`   | N             | --               |
-| `keyEncipherment`  | N             | --               |
+| `keyEncipherment`  | Y             | MAY               |
 | `dataEncipherment` | N             | --               |
-| `keyAgreement`     | Y             | MAY              |
+| `keyAgreement`     | N             | --              |
 | `keyCertSign`      | N             | --               |
 | `cRLSign`          | N             | --               |
 | `encipherOnly`     | N             | --               |
 | `decipherOnly`     | N             | --               |
 
-**Note**: At least one Key Usage MUST be set for RSA Public Keys. The `digitalSignature` bit is REQUIRED for use with modern protocols, such as TLS 1.3, and secure ciphersuites, while the `keyAgreement` bit MAY be asserted to support older protocols, such as TLS 1.2, when using insecure ciphersuites. Subscribers MAY wish to ensure key separation to limit the risk from such legacy protocols, and thus a CA MAY issue a Subscriber certificate that only asserts the `keyAgreement` bit. For most Subscribers, the `digitalSignature` bit is sufficient, while Subscribers that want to mix insecure and secure ciphersuites with the same algorithm MAY choose to assert both `digitalSignature` and `keyAgreement` within the same certificate, although this SHOULD NOT be done by default.
+**Note**: At least one Key Usage MUST be set for RSA Public Keys. The `digitalSignature` bit is REQUIRED for use with modern protocols, such as TLS 1.3, and secure ciphersuites, while the `keyEncipherment` bit MAY be asserted to support older protocols, such as TLS 1.2, when using insecure ciphersuites. Subscribers MAY wish to ensure key separation to limit the risk from such legacy protocols, and thus a CA MAY issue a Subscriber certificate that only asserts the `keyEncipherment` bit. For most Subscribers, the `digitalSignature` bit is sufficient, while Subscribers that want to mix insecure and secure ciphersuites with the same algorithm MAY choose to assert both `digitalSignature` and `keyEncipherment` within the same certificate, although this SHOULD NOT be done by default.
 
 Table: Key Usage for ECC Public Keys
 
@@ -2320,7 +2320,7 @@ If the Issuing CA does not directly sign OCSP responses, it MAY make use of an O
 ##### 7.1.2.7.1 OCSP Responder Extensions
 
 | __Extension__                     | __Presence__ | __Critical__ | __Description__ |
-| ----                              | -            | -            | ----- |
+| ----                              | -            | -            | -----           |
 | `authorityKeyIdentifier`          | MUST         | N            | See [Section 7.1.2.9.1](#71291-authority-key-identifier) |
 | `basicConstraints`                | MUST         | Y            | See [Section 7.1.2.7.3](#71273-basic-constraints) |
 | `extKeyUsage`                     | MUST         | -            | See [Section 7.1.2.7.4](#71274-extended-key-usage) |
@@ -2330,22 +2330,12 @@ If the Issuing CA does not directly sign OCSP responses, it MAY make use of an O
 | `subjectAltName`                  | MUST NOT     | -            | - |
 | `subjectKeyIdentifier`            | SHOULD       | N            | See [Section 7.1.2.9.4](#71294-subject-key-identifier) |
 | `authorityInformationAccess`      | SHOULD NOT   | N            | See [Section 7.1.2.7.2](#71272-authority-information-access) |
+| `certificatePolicies`             | -            | -            | - |
+| \ \ \ \ _Prior to 2021-10-01_     | SHOULD NOT   | N            | See [Section 7.1.2.7.7](#71277-certificate-policies) |
+| \ \ \ \ _Effective 2021-10-01_    | MUST NOT     | -            | - |
 | `crlDistributionPoints`           | SHOULD NOT   | N            | See [Section 7.1.2.9.2](#71292-crl-distribution-points) |
 | Signed Certificate Timestamp List | MAY          | N            | See [Section 7.1.2.9.3](#71293-signed-certificate-timestamp-list) |
-| `certificatePolicies`             | -            | -            | See following tables |
 | Any other extension               | SHOULD NOT   | -            | __**TBD**__ |
-
-
-Table: Additional extension profile for OCSP Responder certificates issued prior to October 1, 2021
-
-| __Extension__                     | __Presence__ | __Critical__ | __Description__ |
-| `certificatePolicies`             | SHOULD NOT   | N            | See [Section 7.1.2.7.7](#71277-certificate-policies) |
-
-
-Table: Effective October 1, 2021, additional extension profile for OCSP Responder certificates
-
-| __Extension__                     | __Presence__ | __Critical__ | __Description__ |
-| `certificatePolicies`             | MUST NOT     | -            | - |
 
 ##### 7.1.2.7.2 Authority Information Access
 
@@ -2485,10 +2475,10 @@ Table: Policy Restricted
 | \ \ **1**                  | MUST         | The first `PolicyInformation` present in the `certificatePolicies`. |
 | \ \ \ \ `policyIdentifier` |              | A Reserved Certificate Policy Identifier (see [Section 7.1.6.1](#7161-reserved-certificate-policy-identifiers)). |
 | \ \ \ \ `policyQualifiers` | MUST NOT     |                 |
-| \ \ **2**                  | SHOULD       | The CA SHOULD include additional Reserved Certificate Policy Identifiers for each type of Subscriber certificate that may be issued beneath it. |
+| \ \ **2+**                 | SHOULD       | The CA SHOULD include additional Reserved Certificate Policy Identifiers for each type of Subscriber certificate that may be issued beneath it. |
 | \ \ \ \ `policyIdentifier` | MUST         | A Reserved Certificate Policy Identifier (see [Section 7.1.6.1](#7161-reserved-certificate-policy-identifiers)). |
 | \ \ \ \ `policyQualifiers` | MUST NOT     |                 |
-| \ \ **3**                  | MAY          | The CA MAY include additional `PolicyInformation` values that meet the following profile: |
+| \ \ **3+**                 | MAY          | The CA MAY include additional `PolicyInformation` values that meet the following profile: |
 | \ \ \ \ `policyIdentifier` | MUST         | An identifier documented by the CA in its Certificate Policy and/or Certification Practice Statement. |
 | \ \ \ \ `policyQualifiers` | MUST NOT     |                 |
 | \ \ **4**                  | MUST NOT     | The CA MUST NOT include any additional `PolicyInformation` values that do not meet the above profile. |
@@ -2505,10 +2495,10 @@ If present, the Certificate Policies extension MUST be formatted as follows:
 | \ \ **1**                  | MUST         | The first `PolicyInformation` present in the `certificatePolicies`. |
 | \ \ \ \ `policyIdentifier` |              | A Reserved Certificate Policy Identifier (see [Section 7.1.6.1](#7161-reserved-certificate-policy-identifiers)). |
 | \ \ \ \ `policyQualifiers` | SHOULD NOT   | See below for restrictions on `policyQualifiers` |
-| \ \ **2**                  | SHOULD       | The CA SHOULD include additional Reserved Certificate Policy Identifiers for each type of Subscriber certificate that may be issued beneath it. |
+| \ \ **2+**                 | SHOULD       | The CA SHOULD include additional Reserved Certificate Policy Identifiers for each type of Subscriber certificate that may be issued beneath it. |
 | \ \ \ \ `policyIdentifier` | MUST         | A Reserved Certificate Policy Identifier (see [Section 7.1.6.1](#7161-reserved-certificate-policy-identifiers)). |
 | \ \ \ \ `policyQualifiers` | SHOULD NOT   | See below for restrictions on `policyQualifiers` |
-| \ \ **3**                  | MAY          | The CA MAY include additional `PolicyInformation` values that meet the following profile: |
+| \ \ **3+**                 | MAY          | The CA MAY include additional `PolicyInformation` values that meet the following profile: |
 | \ \ \ \ `policyIdentifier` | MUST         | An identifier documented by the CA in its Certificate Policy and/or Certification Practice Statement. |
 | \ \ \ \ `policyQualifiers` | SHOULD NOT   | See below for restrictions on `policyQualifiers` |
 | \ \ **4**                  | MUST NOT     | The CA MUST NOT include any additional `PolicyInformation` values that do not meet the above profile. |
@@ -2620,7 +2610,7 @@ Table: `CRLDistributionPoints` profile
 | \ \ \ \ `distributionPoint` | MUST         | The `DistributionPointName` MUST be a `fullName` formatted as described below. |
 | \ \ \ \ `reasons`           | MUST NOT     |                 |
 | \ \ \ \ `cRLIssuer`         | MUST NOT     |                 |
-| \ \ **2**                   | MAY          | Additional `DistributionPoint`s that meet the following profile MAY be present. |
+| \ \ **2+**                  | MAY          | Additional `DistributionPoint`s that meet the following profile MAY be present. |
 | \ \ \ \ `distributionPoint` | MUST         | The `DistributionPointName` MUST be a `fullName` formatted as described below. |
 | \ \ \ \ `reasons`           | MUST NOT     |                 |
 | \ \ \ \ `cRLIssuer`         | MUST NOT     |                 |
